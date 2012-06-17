@@ -37,7 +37,6 @@ class header {
         $head .= '<link href="' . $config->obtenerVariable("carpetaExt") . '1200grid/text.css" rel="stylesheet" />';
         $head .= '<link href="' . $config->obtenerVariable("carpetaExt") . '1200grid/1200.css" rel="stylesheet" />';
 
-        
         //incluimos fons desde http://www.google.com/webfonts
         //$head .='<link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Tangerine"/>';
 

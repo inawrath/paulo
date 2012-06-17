@@ -2,11 +2,27 @@
     hola2 panelMenu
 
     <?php
-    if (isset($_SESSION['username']) && isset($_SESSION['userid']) && $_SESSION['username'] != '' && $_SESSION['userid'] != '0') {
-        
+    if (isset($_SESSION['ACCESO']) && isset($_SESSION['userid']) && $_SESSION['userid'] != '0') {
+        switch ($_SESSION['tipo']) {
+            case 1:
+                echo "menu usuario";
+                ?>
+    <button id="botonIngreso" class="boton">Ingresar</button>
+    <button id="botonIngreso" class="boton">Ingresar</button>
+                <?php
+                break;
+            case 2:
+                echo "menu administrador";
+                ?>
+    <button id="administradorUsuarios" class="boton">Ingresar</button>
+    <button id="administradorMateriales" class="boton">Ingresar</button>
+                <?php
+                break;
+            default:
+                break;
+        }
     } else {
         $_SESSION['ACCESO'] = FALSE;
-        /* boton que abre la ventana login-modal que contiene el ingreso/registro sesion */
         ?>
         <div id="contenedorIngresoModal">
             <form method="post" action="">
@@ -15,21 +31,21 @@
                         <td>Rut:</td>
                     </tr>
                     <tr>
-                        <td><input type="text" name="usuarioIngresoModal" id="usuarioIngresoModal" /></td>
+                        <td><input type="text" name="usuarioIngresoModal" id="usuarioIngreso" /></td>
                     </tr>
                     <tr>
                         <td>Contrase&ntilde;a:</td>
                     </tr>
                     <tr>
-                        <td><input type="password" name="contrasenaIngresModal" id="contrasenaIngresoModal" /></td>
+                        <td><input type="password" name="contrasenaIngresModal" id="contrasenaIngreso" /></td>
                     </tr>
                     <tr>
-                        <td colspan="2" align="right"><span class="cargando" id="cargando"></span><button id="botonIngresoModal" class="boton">Ingresar</button></td>
+                        <td colspan="2" align="right"><span class="cargando" id="cargandoIngreso"></span><button id="botonIngreso" class="boton">Ingresar</button></td>
                     </tr>
                 </table>
             </form>
         </div>
-        <div id="alertasUsuario">
+        <div id="alertaIngreso">
         </div>
     </div>
     <?php

@@ -1,25 +1,24 @@
 <?php
-class inicioControlador extends baseControladores{
+
+class inicioControlador extends baseControladores {
+
     //Accion inicio
-    public function inicio()
-    {
-        if (isset($_SESSION['tipo'])) {
-            switch ($_SESSION['tipo']) {
-                case 0:
-                    $this->vista->desplegar("inicio","inicio.php");
-                    break;
-                case 1:
-                    $this->vista->desplegar("inicio","usuario.php");
-                    break;
-                case 2:
-                    $this->vista->desplegar("inicio","administrador.php");
-                    break;
-                default:
-                    break;
-            }
-        }//*/
+    public function inicio() {
+        switch ($_SESSION['tipo']) {
+            case 0:
+                $this->vista->desplegar("inicio", "inicio.php");
+                break;
+            case 1:
+                $this->vista->desplegar("inicio", "usuario.php");
+                break;
+            case 2:
+                $this->vista->desplegar("inicio", "administrador.php");
+                break;
+            default:
+                break;
+        }
     }
-    
+
     public function nuevoUsuario() {
         $usuario = 'admin';
         $password = 'minda';
@@ -40,5 +39,7 @@ class inicioControlador extends baseControladores{
             `usu_nombre` )
         VALUES ('$usuario','$encriptado',$tipo,'$nombre')";
     }
+
 }
+
 ?>
