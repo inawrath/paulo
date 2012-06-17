@@ -9,13 +9,13 @@ $config->guardarVariable('dbpass', 'jerusalen22');//*/
 
 /*base de datos de pruebas*/
 $config->guardarVariable('dbhost', 'localhost');
-$config->guardarVariable('dbname', 'lac');
+$config->guardarVariable('dbname', 'prueba');
 $config->guardarVariable('dbuser', 'root');
 $config->guardarVariable('dbpass', '');//*/
 
 
-/*url principal de la pagina por ahora es http://localhost/LAC/ despues pasara a ser http://lasamericascapacitacion.cl*/
-$config->guardarVariable('url','http://localhost/MVC/');
+/*url principal de la pagina por ahora es http://localhost/paulo despues pasara a ser http://www.dominio.algo*/
+$config->guardarVariable('url','http://localhost/paulo/');
 
 
 //Carpetas principales
@@ -28,5 +28,5 @@ $config->guardarVariable('carpetaCss',$config->obtenerVariable('url').'librerias
 $config->guardarVariable('carpetaJs',$config->obtenerVariable('url').'librerias/js/');
 $config->guardarVariable('carpetaExt',$config->obtenerVariable('url').'librerias/externas/');
 
-$config->guardarVariable('Favicon','http://localhost/MVC/img/favicon.ico');
+$config->guardarVariable('Favicon',$config->obtenerVariable('url').'img/favicon.ico');
 ?>

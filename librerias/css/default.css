@@ -1,9 +1,3 @@
-@import "partesFijas/panelSuperior.css";
-@import "partesFijas/panelMenu.css";
-@import "partesFijas/panelPublicidad.css";
-@import "partesFijas/panelInferior.css";
-@import "partesFijas/ingresoModal.css";
-@import "partesFijas/usuarios.css";
 
 body{
     font-family:"Arial",Georgia,Serif;
@@ -12,34 +6,12 @@ body{
     text-align: left;
 }
 
-.division1{
-    height: 10px;
-    background-color: #eaeaea;
-}
-/*este es el div que contiene todo lo cambiante*/
-#contenedorPrincipal{
-    width: 100%;
-    min-height: 400px;
-    margin-bottom: 20px;
-}
-
-/*Para cargar las imagenes antes de que el usuario abra algo*/
 .oculto{
     display: none;
 }
 .center{
     text-align: center;
 }
-.w100{
-    width: 98%;   
-}
-
-
-/* Overlay - fondo de la pantalla modal esto lo pone solo jquery*/
-#simplemodalOverlay {background-color:black; opacity:0.5; cursor:wait;}
-/*este el punto done poner la imagen de cerrado*/
-/*#simplemodal-container a.modalCloseImg {background-image: url('http://pagina.algo/img/cerrar.png');width:25px; height:29px; display:inline; z-index:343535200; position:absolute; top:-15px; right:-16px; cursor:pointer;}*/
-#simplemodalContainer a.modalCloseImg {background-image: url('../../img/cerrar.png');width:25px; height:29px; display:inline; z-index:343535200; position:absolute; top:-15px; right:-16px; cursor:pointer;}
 
 /*Clase por defecto para los botones*/
 .boton{

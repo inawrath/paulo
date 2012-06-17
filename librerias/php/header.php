@@ -31,8 +31,6 @@ class header {
         //incluimos jquery
         $head ="";
         $head .= '<script type="text/javascript" src="' . $config->obtenerVariable("carpetaExt") . 'jquery/jquery.js"></script>';
-        //incluimos jquery simplemodal para desplegar información en una pantalla modal
-        $head .= '<script type="text/javascript" src="' . $config->obtenerVariable("carpetaExt") . 'jquery/jquery.simplemodal.js"></script>';
         
         //incluimos los elementos para que funcione 1200grid
         $head .= '<link href="' . $config->obtenerVariable("carpetaExt") . '1200grid/reset.css" rel="stylesheet" />';

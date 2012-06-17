@@ -21,31 +21,6 @@ class usuarioModelo extends baseModelos {
         return $consulta;
     }
 
-    public function actualizarDatos($idUsuario, $informacion, $datos) {
-        switch ($informacion) {
-            case '1':
-                /* insertar informacion basica */
-
-                $sentencia = 'UPDATE ';
-                $consulta = $this->db->prepare($sentencia);
-                $consulta->bindParam(":id", $idUsuario);
-                $consulta->execute();
-                return $consulta;
-
-                break;
-            case '2':
-                /* modificar contraseña */
-
-                break;
-            case '3':
-                /* actualizar numeros telefonicos */
-
-                break;
-            default:
-                break;
-        }
-    }
-
 }
 
 ?>

@@ -23,7 +23,7 @@ class controlPrincipal {
         } else {
             $nombreControlador = "inicioControlador";
         }
-        print_r($variablesURL);
+        //print_r($variablesURL);
         //Lo mismo sucede con las acciones, si no hay accion, tomamos inicio como accion
         if (!empty($variablesURL['accion'])) {
             $nombreAccion = $variablesURL['accion'];
@@ -51,19 +51,16 @@ class controlPrincipal {
         $controlador = new $nombreControlador();
         //echo $_SESSION['tipo'].$_SESSION['acceso'].$_SESSION['username'];
         //verificamos el permiso de acceso segun el tipo de usuario
-        //0=invitado, 1=alumno, 2=profesor, 3=administrador
+        //0=invitado, 1=usuario, 2=administrador
         if (isset($_SESSION['tipo'])) {
             switch ($_SESSION['tipo']) {
                 case 0:
                     $permiso = autentificacion::invitado($variablesURL);
                     break;
                 case 1:
-                    $permiso = autentificacion::alumno($variablesURL);
+                    $permiso = autentificacion::usuario($variablesURL);
                     break;
                 case 2:
-                    $permiso = autentificacion::profesor($variablesURL);
-                    break;
-                case 3:
                     //echo '$permiso';
                     $permiso = autentificacion::administrador($variablesURL);
                     break;
@@ -71,6 +68,7 @@ class controlPrincipal {
                     break;
             }
         }//*/
+        //$permiso = 1;
         switch ($permiso) {
             case 1:
                 //sin id

@@ -18,10 +18,14 @@ class autentificacion {
                     case 'inicio':
                         return 1;
                         break;
+                    case 'nuevoUsuario':
+                        return 1;
+                        break;
                     default: return 4;
                         break;
                 }
                 break;
+            //prueba lista a los usuarios, solo es un ejemplo
             case 'prueba':
                 switch ($nombreAccion) {
                     case 'inicio':
@@ -36,6 +40,9 @@ class autentificacion {
                     case 'ingresar':
                         return 1;
                         break;
+                    case 'salir':
+                        return 1;
+                        break;
                     default: return 4;
                         break;
                 }
@@ -46,7 +53,19 @@ class autentificacion {
         return 4;
     }
 
-
+    public static function usuario($var) {
+        //modificar para las cosas que solo puede hacer el usuario
+        if ($var['id'] != '') {
+            if ($var['subId'] != '') {
+                return 3;
+            } else {
+                return 2;
+            }
+        } else {
+            return 1;
+        }
+    }
+    
     public static function administrador($var) {
         if ($var['id'] != '') {
             if ($var['subId'] != '') {

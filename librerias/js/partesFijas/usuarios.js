@@ -2,47 +2,6 @@ $(document).ready(function(){
     //obtener la url para utilizarla cuando sea pertinente
     var url=$(this).obtenerVariable('url');
     
-    var msie6 = $.browser == 'msie' && $.browser.version < 7;
-    //verifico que exita el div con el botonIngresar - botonRegistro y que el explorar sea distinto de ie6
-    if (!msie6 && $("#botonIngresar").length /*&& $("#botonRegistro").length*/) {
-        var top = $('#botonIngresar').offset().top - parseFloat($('#botonIngresar').css('margin-top').replace(0, 0));
-        $(window).scroll(function (event) {
-            // obtengo la posicion del scroll
-            var y = $(this).scrollTop();
-
-            // si es mayor que la posición del botonIngresar le agrego la clase fixed 
-            if (y >= top) {
-                $('#botonIngresar').addClass('fixed');
-                //$('#botonRegistro').addClass('fixed');
-            } else {
-                // sino removimos la clase
-                $('#botonIngresar').removeClass('fixed');
-                //$('#botonRegistro').removeClass('fixed'); 
-            }
-        });
-    }
-    
-    //abrir ingresoModal
-    $('#botonIngresar').click(function (e) {
-        $('#ingresoModal').modal({
-            /*funcion para animar abrir ingreso modal*/
-            onOpen: function (dialog) {
-                dialog.overlay.fadeIn('fast', function () {
-                    dialog.container.fadeIn('fast', function () {
-                        dialog.data.slideDown('fast');
-                    });
-                });
-            },
-            /*funcion para animar el cerrar ingresoModal*/
-            onClose: function (dialog) {
-                dialog.container.hide('fast', function () {
-                    $.modal.close();
-                });
-            }
-        });
-        return false;
-    });
-        
     var timeSlide = 1000;
     $('#cargando').hide(0);
     $('#cargando').css('display','none');

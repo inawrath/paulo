@@ -33,37 +33,21 @@ class baseVistas {
 
         /*         * ********************************** */
         echo '<body>';
-        //incluimos el panel superior, que contiene (logo - Lema - Usuario)
-        include $config->obtenerVariable('carpetaVistas') . 'partesFijas/panelSuperior.php';
-        //incluimos barra divisora
-        echo '<div class="division1"></div>';
-
-        //abrimos el contenedor principal
-        echo '<div id="contenedor-principal">';
         echo '<div class="container_20">';
-        //incluimos el menu
-        include $config->obtenerVariable('carpetaVistas') . 'partesFijas/panelMenu.php';
-
-        //panel-cuerpo
-        echo '<div id="panel-cuerpo">';
+        //incluimos el panelSuperior
+        include $config->obtenerVariable('carpetaVistas') . 'partesFijas/panelSuperior.php';
         
-        //panel-cambiante es lo que lleva las vistas =)
-        echo '<section class="grid_13" id="panel-cambiante">';
+        //incluimos el panel Menu, depende del usuario si esta registrado
+        include $config->obtenerVariable('carpetaVistas') . 'partesFijas/panelMenu.php';
+        
+        //panel-cambiante lleva cada cosa distinta dependiendo del nombre
+        echo '<section id="panelCambiante" class="grid_16 blue">';
         include $vistaHtml;
         echo '</section>';
-
-        //incluimos el panel de publicidad
-        include $config->obtenerVariable('carpetaVistas') . 'partesFijas/panelPublicidad.php';
+        echo '<div class="clear"></div>';
         
-        echo'<div class="clear"></div>';
-
-        echo '</div>'; //fin panel-cuerpo
         echo '</div>'; //fin container
-        echo '</div>'; //fin contenedor-principal
-        
-        //incluimos el panel inferior
-        include $config->obtenerVariable('carpetaVistas') . 'partesFijas/panelInferior.php';
-
+    
         echo '</body>';
         /*         * **************************************** */
 
