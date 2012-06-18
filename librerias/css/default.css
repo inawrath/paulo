@@ -1,3 +1,5 @@
+@import "partesFijas/panelsuperior.css";
+@import "partesFijas/panelMenu.css";
 
 body{
     font-family:"Arial",Georgia,Serif;
@@ -11,6 +13,10 @@ body{
 }
 .center{
     text-align: center;
+}
+.w90{
+    width: 90%;
+    margin-left: 5%;
 }
 
 /*Clase por defecto para los botones*/

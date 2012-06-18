@@ -1,30 +1,26 @@
 <nav id="panelMenu" class="grid_4 yellow">
-    hola2 panelMenu
-
-    <?php
-    if (isset($_SESSION['ACCESO']) && isset($_SESSION['userid']) && $_SESSION['userid'] != '0') {
-        switch ($_SESSION['tipo']) {
-            case 1:
-                echo "menu usuario";
-                ?>
-    <button id="botonIngreso" class="boton">Ingresar</button>
-    <button id="botonIngreso" class="boton">Ingresar</button>
-                <?php
-                break;
-            case 2:
-                echo "menu administrador";
-                ?>
-    <button id="administradorUsuarios" class="boton">Ingresar</button>
-    <button id="administradorMateriales" class="boton">Ingresar</button>
-                <?php
-                break;
-            default:
-                break;
-        }
-    } else {
-        $_SESSION['ACCESO'] = FALSE;
-        ?>
-        <div id="contenedorIngresoModal">
+    <div id="contenedorMenu">
+        <?php
+        if (isset($_SESSION['ACCESO']) && isset($_SESSION['userid']) && $_SESSION['userid'] != '0') {
+            switch ($_SESSION['tipo']) {
+                case 1:
+                    ?>
+                    <button id="usuarioBuscaMaterial" class="boton w90">Buscar Material</button>
+                    <button id="usuarioPrestamosActivos" class="boton w90">Prestamos Activos</button>
+                    <?php
+                    break;
+                case 2:
+                    ?>
+                    <button id="administradorUsuarios" class="boton w90">Usuarios</button>
+                    <button id="administradorMateriales" class="boton w90">Materiales</button>
+                    <?php
+                    break;
+                default:
+                    break;
+            }
+        } else {
+            $_SESSION['ACCESO'] = FALSE;
+            ?>
             <form method="post" action="">
                 <table cellpadding="0" cellspacing="0" border="0" align="center">
                     <tr>
@@ -44,11 +40,10 @@
                     </tr>
                 </table>
             </form>
-        </div>
-        <div id="alertaIngreso">
-        </div>
+            <div id="alertaIngreso">
+            </div>
+            <?php
+        }
+        ?>
     </div>
-    <?php
-}
-?>
 </nav>
