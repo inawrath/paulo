@@ -1,6 +1,6 @@
 <?php
 
-class pruebaModelo extends baseModelos {
+class inicioModelo extends baseModelos {
 
     public function listarUsuarios() {
         //realizamos la consulta de todos los items

@@ -6,7 +6,19 @@ class inicioControlador extends baseControladores {
     public function inicio() {
         switch ($_SESSION['tipo']) {
             case 0:
-                $this->vista->desplegar("inicio", "inicio.php");
+                //Incluye el modelo que corresponde
+                require 'modelos/inicioModelo.php';
+
+                //Creamos una instancia de nuestro "modelo"
+                $items = new inicioModelo();
+
+                //Le pedimos al modelo todos los items usuarios
+                $listado = $items->listarUsuarios();
+
+                //Pasamos a la vista toda la informacion que se desea representar
+                $data['listado'] = $listado;
+
+                $this->vista->desplegar("inicio", "inicio.php", $data);
                 break;
             case 1:
                 $this->vista->desplegar("inicio", "usuario.php");
