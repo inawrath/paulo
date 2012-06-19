@@ -17,7 +17,7 @@ class usuariosControlador extends BaseControladores {
             $_SESSION['userid'] = $item['usu_id'];
             $_SESSION['tipo'] = $item['usu_tipo'];
             $_SESSION['acceso'] = true;
-            
+
             $n++;
         }
         echo $n;
@@ -32,7 +32,27 @@ class usuariosControlador extends BaseControladores {
         header('Location:' . $config->obtenerVariable('url'));
         exit(0);
     }
- 
+
+    public function insertar() {
+        
+    }
+
+    public function actualizar() {
+        
+    }
+
+    public function mostrarTodos() {
+        
+    }
+
+    public function mostrarUno() {
+        
+    }
+
+    public function eliminar() {
+        //borrado logico
+    }
+
 }
 
 ?>

@@ -7,9 +7,7 @@ class inicioModelo extends baseModelos {
         $consulta = $this->db->prepare('SELECT * FROM usuarios');
         $consulta->execute();
         //devolvemos la coleccion para que la vista la presente.
-        $lista = "";
-        while($lista[] = $consulta->fetch());
-        return $lista;
+        return $consulta;
     }
 
 }
