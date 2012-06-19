@@ -6,7 +6,8 @@ class inicioControlador extends baseControladores {
     public function inicio() {
         switch ($_SESSION['tipo']) {
             case 0:
-                $this->vista->desplegar("inicio", "inicio.php");
+                $data['pruebas'] = inicioControlador::prueba();
+                $this->vista->desplegar("inicio", "inicio.php",  $data);
                 break;
             case 1:
                 $this->vista->desplegar("inicio", "usuario.php");
@@ -38,6 +39,14 @@ class inicioControlador extends baseControladores {
             `usu_tipo` ,
             `usu_nombre` )
         VALUES ('$usuario','$encriptado',$tipo,'$nombre')";
+    }
+    
+    private static function prueba(){
+        require_once 'modelos/inicioModelo.php';
+        
+        $consulta = new inicioModelo();
+        
+        return $consulta->listarUsuarios();
     }
 
 }

@@ -1,0 +1,17 @@
+<?php
+
+class inicioModelo extends baseModelos {
+
+    public function listarUsuarios() {
+        //realizamos la consulta de todos los items
+        $consulta = $this->db->prepare('SELECT * FROM usuarios');
+        $consulta->execute();
+        //devolvemos la coleccion para que la vista la presente.
+        $lista = "";
+        while($lista[] = $consulta->fetch());
+        return $lista;
+    }
+
+}
+
+?>
