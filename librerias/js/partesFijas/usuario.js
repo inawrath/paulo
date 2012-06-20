@@ -17,7 +17,7 @@ $(document).ready(function(){
 				
                 $.ajax({
                     type: 'POST',
-                    url: url+'usuarios/ingresar',
+                    url: url+'usuario/ingresar',
                     data: 'usuario=' + $usuario.val() + '&contrasena=' + $contrasena.val(),
                     success:function(msj){
                         //probar resultado que devuelve
@@ -79,7 +79,7 @@ $(document).ready(function(){
             }
         });//*/
         //setTimeout(function(){
-            window.location.href = url+"usuarios/salir?pagina="+document.URL;
+            window.location.href = url+"usuario/salir?pagina="+document.URL;
         //},2500);
     });	
     

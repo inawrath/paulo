@@ -1,10 +1,10 @@
 <?php
 
-class usuariosControlador extends BaseControladores {
+class usuarioControlador extends BaseControladores {
 
     public function ingresar() {
         //Incluye el modelo que corresponde
-        require 'modelos/usuariosModelo.php';
+        require 'modelos/usuarioModelo.php';
 
         //Creamos una instancia de nuestro "modelo"
         $usuarios = new usuarioModelo();
@@ -33,23 +33,15 @@ class usuariosControlador extends BaseControladores {
         exit(0);
     }
 
-    public function insertar() {
-        
+    public function nuevo() {
+        $this->vista->desplegar("inicio", "administradorNuevoUsuario.php");
     }
 
-    public function actualizar() {
-        
+    public function editar() {   
+        $this->vista->desplegar("inicio", "administradorEditarUsuario.php");
     }
 
-    public function mostrarTodos() {
-        
-    }
-
-    public function mostrarUno() {
-        
-    }
-
-    public function eliminar() {
+    public function elimina() {
         //borrado logico
     }
 

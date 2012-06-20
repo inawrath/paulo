@@ -77,7 +77,7 @@ class header {
         $head .= '<script type="text/javascript" src="' . $config->obtenerVariable("carpetaJs") . 'default.js"></script>'; 
         
         //incluimos control de usuarios
-        $head .= '<script type="text/javascript" src="' . $config->obtenerVariable("carpetaJs") . 'partesFijas/usuarios.js"></script>';
+        $head .= '<script type="text/javascript" src="' . $config->obtenerVariable("carpetaJs") . 'partesFijas/usuario.js"></script>';
 
         /* funciones de la pagina si es que existen las agregamos */
         $js = "librerias/js/" . $nombrePagina . "Funciones.js";
