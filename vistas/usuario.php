@@ -1,1 +1,1 @@
-usuario
+Bienvenido <?= $_SESSION['username']; ?>

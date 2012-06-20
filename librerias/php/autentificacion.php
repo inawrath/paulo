@@ -25,17 +25,7 @@ class autentificacion {
                         break;
                 }
                 break;
-            //prueba lista a los usuarios, solo es un ejemplo
-            case 'prueba':
-                switch ($nombreAccion) {
-                    case 'inicio':
-                        return 1;
-                        break;
-                    default: return 4;
-                        break;
-                }
-                break;
-            case 'usuarios':
+            case 'usuario':
                 switch ($nombreAccion) {
                     case 'ingresar':
                         return 1;
@@ -65,19 +55,40 @@ class autentificacion {
             return 1;
         }
     }
-    
-    public static function administrador($var) {
-        if ($var['id'] != '') {
-            if ($var['subId'] != '') {
-                return 3;
-            } else {
-                return 2;
-            }
-        } else {
-            return 1;
-        }
-    }
 
+    public static function administrador($var) {
+        $nombreControlador = $var['controlador'];
+        $nombreAccion = $var['accion'];
+        switch ($nombreControlador) {
+            case 'inicio':
+                switch ($nombreAccion) {
+                    case 'inicio':
+                        return 1;
+                        break;
+                    case 'nuevoUsuario':
+                        return 1;
+                        break;
+                    default: return 4;
+                        break;
+                }
+                break;
+            case 'usuario':
+                switch ($nombreAccion) {
+                    case 'nuevo':
+                        return 1;
+                        break;
+                    case 'salir':
+                        return 1;
+                        break;
+                    default: return 4;
+                        break;
+                }
+                break;
+            default: return 4;
+                break;
+        }
+        return 4;
+    }
 
 }
 
