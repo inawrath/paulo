@@ -51,6 +51,14 @@ class inicioControlador extends baseControladores {
             `usu_nombre` )
         VALUES ('$usuario','$encriptado',$tipo,'$nombre')";
     }
+    
+    private static function prueba(){
+        require_once 'modelos/inicioModelo.php';
+        
+        $consulta = new inicioModelo();
+        
+        return $consulta->listarUsuarios();
+    }
 
 }
 

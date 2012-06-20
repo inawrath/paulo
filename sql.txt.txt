@@ -1,9 +1,12 @@
-CREATE  TABLE IF NOT EXISTS `prueba`.`Usuarios` (
-  `usu_id` INT NOT NULL AUTO_INCREMENT ,
-  `usu_usuario` VARCHAR(50) NOT NULL ,
-  `usu_contrasena` VARCHAR(42) NOT NULL ,
-  `usu_nombre` VARCHAR(50) NOT NULL ,
-  `usu_tipo` TINYINT NOT NULL DEFAULT 0 ,
-  PRIMARY KEY (`usu_id`, `usu_usuario`) ,
-  UNIQUE INDEX `usu_usuario_UNIQUE` (`usu_usuario` ASC) )
-ENGINE = INNODB;
+CREATE TABLE Usuarios (
+  usu_id INT ,
+  usu_usuario VARCHAR(50),
+  usu_contrasena VARCHAR(42),
+  usu_nombre VARCHAR(50),
+  usu_tipo INT,
+  PRIMARY KEY (usu_id, usu_usuario));
+
+SELECT * FROM usuarios;
+
+INSERT INTO Usuarios
+VALUES(1,'inawrath','asdf','ivan',2);
