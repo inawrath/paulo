@@ -6,19 +6,15 @@ class spdo extends PDO {
 
     public function __construct() {
         $config = config::singleton();
-        $tns = "
-(DESCRIPTION =
-    (ADDRESS_LIST =
-      (ADDRESS = (PROTOCOL = TCP)(HOST = localhost)(PORT = 1521))
-    )
-    (CONNECT_DATA =
-      (SERVICE_NAME = orcl)
-    )
-  )
-       ";
 
-        //parent::__construct('mysql:host=' . $config->obtenerVariable('dbhost') . ';dbname=' . $config->obtenerVariable('dbname'), $config->obtenerVariable('dbuser'), $config->obtenerVariable('dbpass'));
-        parent::__construct('oci:host=localhost;dbname=XE;port=1521;', 'SYSTEM', 'oracle');
+        $conexion = $config->obtenerVariable('driver') .
+                ':host=' . $config->obtenerVariable('dbhost') .
+                ';dbname=' . $config->obtenerVariable('dbname');
+        if ($config->obtenerVariable('driver') == 'oci') {
+            $conexion .= ';port=' . $config->obtenerVariable('port');
+        }
+
+        parent::__construct($conexion, $config->obtenerVariable('dbuser'), $config->obtenerVariable('dbpass')/* , $config->obtenerVariable('options') */);
     }
 
     public static function singleton() {
