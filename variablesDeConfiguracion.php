@@ -1,12 +1,6 @@
 <?php
 $config = config::singleton();
 
-/*Base de Datos compartida*/
-/*$config->guardarVariable('dbhost', 'lacubb.sytes.net');
-$config->guardarVariable('dbname', 'lac');
-$config->guardarVariable('dbuser', 'jona');
-$config->guardarVariable('dbpass', 'jerusalen22');//*/
-
 /*base de datos de pruebas*/
 $config->guardarVariable('dbhost', 'localhost');
 $config->guardarVariable('dbname', 'prueba');
@@ -17,6 +11,7 @@ $config->guardarVariable('dbpass', '');//*/
 /*url principal de la pagina por ahora es http://localhost/paulo despues pasara a ser http://www.dominio.algo*/
 $config->guardarVariable('url','http://localhost/paulo/');
 
+$config->guardarVariable('driver','mysql');
 
 //Carpetas principales
 $config->guardarVariable('carpetaControladores', 'controladores/');

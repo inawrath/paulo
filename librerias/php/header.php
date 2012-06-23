@@ -3,13 +3,11 @@
 class header {
 
     public static function metasLibrerias($nombrePagina) {
-        $head = '<head>';
-        $head .='<title>' . $nombrePagina . '</title>';
+        $head ='<title>' . $nombrePagina . '</title>';
         $head .= header::metas();
         $head .= header::externas($nombrePagina);
         $head .= header::css($nombrePagina);
         $head .= header::javascript($nombrePagina);
-        $head .= '</head>';
         echo $head;
     }
 
@@ -32,11 +30,16 @@ class header {
         $head ="";
         $head .= '<script type="text/javascript" src="' . $config->obtenerVariable("carpetaExt") . 'jquery/jquery.js"></script>';
         
+        $head .= '<script type="text/javascript" src="' . $config->obtenerVariable("carpetaExt") . 'jquery/jquery.Rut.js"></script>';
+        
+        
         //incluimos los elementos para que funcione 1200grid
         $head .= '<link href="' . $config->obtenerVariable("carpetaExt") . '1200grid/reset.css" rel="stylesheet" />';
         $head .= '<link href="' . $config->obtenerVariable("carpetaExt") . '1200grid/text.css" rel="stylesheet" />';
         $head .= '<link href="' . $config->obtenerVariable("carpetaExt") . '1200grid/1200.css" rel="stylesheet" />';
 
+        
+        
         //incluimos fons desde http://www.google.com/webfonts
         //$head .='<link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Tangerine"/>';
 

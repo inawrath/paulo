@@ -21,10 +21,10 @@ class inicioControlador extends baseControladores {
                 $this->vista->desplegar("inicio", "inicio.php", $data);
                 break;
             case 1:
-                $this->vista->desplegar("inicio", "usuario.php");
+                $this->vista->desplegar("usuario", "usuario.php");
                 break;
             case 2:
-                $this->vista->desplegar("inicio", "administrador.php");
+                $this->vista->desplegar("administrador", "administrador.php");
                 break;
             default:
                 break;
@@ -52,14 +52,6 @@ class inicioControlador extends baseControladores {
         VALUES ('$usuario','$encriptado',$tipo,'$nombre')";
     }
     
-    private static function prueba(){
-        require_once 'modelos/inicioModelo.php';
-        
-        $consulta = new inicioModelo();
-        
-        return $consulta->listarUsuarios();
-    }
-
 }
 
 ?>

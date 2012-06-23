@@ -13,6 +13,16 @@ $(document).ready(function(){
         $cargando.fadeIn(300);
         $('.cajaInformacion, .cajaCorrecta, .cajaAlertas, .cajaError').slideUp(timeSlide);
         setTimeout(function(){
+            //http://joaquinnunez.cl/jQueryRutPlugin/
+            /*$usuario.Rut({
+                format: false,
+                on_error: function(){
+                    alert('El rut ingresado es incorrecto');
+                },
+                on_success: function(){
+                    alert('El rut es correcto');
+                }
+            })//*/
             if ( $usuario.val() != "" && $contrasena.val() != "" ){
 				
                 $.ajax({
@@ -21,7 +31,7 @@ $(document).ready(function(){
                     data: 'usuario=' + $usuario.val() + '&contrasena=' + $contrasena.val(),
                     success:function(msj){
                         //probar resultado que devuelve
-                        //alert(msj);
+                        alert(msj);
                         if ( msj == 1 ){
                             $alerta.html('<div class="cajaCorrecta"></div>');
                             $('.cajaCorrecta').hide(0).html('Espera un momento&#133;');
@@ -79,7 +89,7 @@ $(document).ready(function(){
             }
         });//*/
         //setTimeout(function(){
-            window.location.href = url+"usuario/salir?pagina="+document.URL;
+        window.location.href = url+"usuario/salir";
         //},2500);
     });	
     

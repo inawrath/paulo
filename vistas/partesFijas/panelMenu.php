@@ -3,12 +3,14 @@
         <?php
         if (isset($_SESSION['ACCESO']) && isset($_SESSION['userid']) && $_SESSION['userid'] != '0') {
             switch ($_SESSION['tipo']) {
+                //usuario normal
                 case 1:
                     ?>
                     <button id="usuarioBuscaMaterial" class="boton w90">Buscar Material</button>
                     <button id="usuarioPrestamosActivos" class="boton w90">Prestamos Activos</button>
                     <?php
                     break;
+                //usuario administrador
                 case 2:
                     ?>
                     <button id="administradorUsuarios" class="boton w90">Usuarios</button>

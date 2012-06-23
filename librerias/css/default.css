@@ -8,6 +8,10 @@ body{
     text-align: left;
 }
 
+#panelCambiante{
+    text-align: center;
+}
+
 .oculto{
     display: none;
 }

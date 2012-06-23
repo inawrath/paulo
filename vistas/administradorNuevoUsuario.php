@@ -1,6 +1,6 @@
 <h1>Ingrese datos Usuario Nuevo</h1>
 <form>
-    <table>
+    <table align="center">
         <tr>
             <td><input id="nombreUsuario" /></td>
         </tr>
