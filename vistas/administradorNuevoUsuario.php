@@ -16,7 +16,7 @@
             </td>
         </tr>
         <tr>
-            <td><button id="administradorNuevoUsuario" class="boton">Guardar Nuevo Usuario</button></td>
+            <td><button id="guardarNuevoUsuario" class="boton">Guardar Nuevo Usuario</button></td><td><button id="cancelarNuevoUsuario" class="boton">Cancelar</button></td>
         </tr>
     </table>
 </form>

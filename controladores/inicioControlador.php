@@ -15,6 +15,8 @@ class inicioControlador extends baseControladores {
                 //Le pedimos al modelo todos los items usuarios
                 $listado = $items->listarUsuarios();
 
+                print_r($listado);
+
                 //Pasamos a la vista toda la informacion que se desea representar
                 $data['listado'] = $listado;
 
@@ -51,7 +53,7 @@ class inicioControlador extends baseControladores {
             `usu_nombre` )
         VALUES ('$usuario','$encriptado',$tipo,'$nombre')";
     }
-    
+
 }
 
 ?>

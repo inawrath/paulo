@@ -1,8 +1,8 @@
-inicio
+hola
 
 <br/>
-listado de usuarios:
-
+listado de Materiales:
+<button id="agregarNuevoMaterial" class="boton">Agregar Nuevo Material</button>
 <?php
 // $listado es una variable asignada desde pruebaControlador $data['listado'] 
 // la cual se le pasa a base vistas la cual hace la conversion a $listado
@@ -13,9 +13,9 @@ while ($item = $listado->fetch()) {
     ?>
     <br/>
     <span>
-        <?php echo $item['rut'] ?>
-        <?php echo $item['nombre'] ?>
-        <?php echo $item['tipo'] ?>
+        <?php echo $item['usu_id'] ?>
+        <?php echo $item['usu_usuario'] ?>
+        <?php echo $item['usu_tipo'] ?>
     </span>
     <?php
 }

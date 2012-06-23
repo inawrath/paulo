@@ -1,8 +1,6 @@
 <?php
 $config = config::singleton();
 
-<<<<<<< HEAD
-=======
 /*Base de Datos ORACLE*/
 $config->guardarVariable('driver', 'oci');
 $config->guardarVariable('dbhost', 'localhost');
@@ -11,7 +9,6 @@ $config->guardarVariable('dbuser', 'SYSTEM');
 $config->guardarVariable('dbpass', 'oracle');
 //*/
 
->>>>>>> 6c6924d9b35596e41787602a2e99d47853072a78
 /*base de datos de pruebas*/
 /*$config->guardarVariable('driver', 'mysql');
 $config->guardarVariable('dbhost', 'localhost');
@@ -34,7 +31,6 @@ $config->guardarVariable('options', array(PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCE
 /*url principal de la pagina por ahora es http://localhost/paulo despues pasara a ser http://www.dominio.algo*/
 $config->guardarVariable('url','http://localhost/paulo/');
 
-$config->guardarVariable('driver','mysql');
 
 //Carpetas principales
 $config->guardarVariable('carpetaControladores', 'controladores/');

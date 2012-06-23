@@ -4,7 +4,7 @@ $(document).ready(function(){
     
     var timeSlide = 1000;
     var $cargando = $('#cargandoIngreso');
-    var $usuario = $('#usuarioIngreso');
+    var $rut = $('#rutIngreso');
     var $contrasena = $('#contrasenaIngreso');
     var $alerta = $('#alertaIngreso');
     $cargando.hide(0);
@@ -23,12 +23,12 @@ $(document).ready(function(){
                     alert('El rut es correcto');
                 }
             })//*/
-            if ( $usuario.val() != "" && $contrasena.val() != "" ){
+            if ( $rut.val() != "" && $contrasena.val() != "" ){
 				
                 $.ajax({
                     type: 'POST',
-                    url: url+'usuario/ingresar',
-                    data: 'usuario=' + $usuario.val() + '&contrasena=' + $contrasena.val(),
+                    url: url+'?controlador=usuario&accion=ingresar',
+                    data: 'rut=' + $rut.val() + '&contrasena=' + $contrasena.val(),
                     success:function(msj){
                         //probar resultado que devuelve
                         alert(msj);
@@ -89,8 +89,23 @@ $(document).ready(function(){
             }
         });//*/
         //setTimeout(function(){
-        window.location.href = url+"usuario/salir";
+        window.location.href = url+"?controlador=usuario&accion=salir";
         //},2500);
     });	
     
+    /*menu usuario*/
+    $('#usuarioBuscaMaterial').click(function(){
+        window.location.href = url+"?controlador=material&accion=listar";
+    });
+    /*$('#usuarioPrestamosActivos').click(function(){
+        window.location.href = url+"?controlador=prestamo&accion=listar";
+    });//*/    
+    
+    /*menu admin*/
+    $('#administradorUsuarios').click(function(){
+        window.location.href = url+"?controlador=usuario&accion=listar";
+    });
+    $('#administradorMateriales').click(function(){
+        window.location.href = url+"?controlador=material&accion=listar";
+    });
 });

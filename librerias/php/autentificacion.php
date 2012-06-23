@@ -57,7 +57,18 @@ class autentificacion {
     }
 
     public static function administrador($var) {
-        $nombreControlador = $var['controlador'];
+        //modificar para las cosas que solo puede hacer el usuario
+        if ($var['id'] != '') {
+            if ($var['subId'] != '') {
+                return 3;
+            } else {
+                return 2;
+            }
+        } else {
+            return 1;
+        }
+        
+        /*$nombreControlador = $var['controlador'];
         $nombreAccion = $var['accion'];
         switch ($nombreControlador) {
             case 'inicio':
@@ -87,7 +98,7 @@ class autentificacion {
             default: return 4;
                 break;
         }
-        return 4;
+        return 4;//*/
     }
 
 }

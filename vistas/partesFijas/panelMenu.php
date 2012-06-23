@@ -7,7 +7,7 @@
                 case 1:
                     ?>
                     <button id="usuarioBuscaMaterial" class="boton w90">Buscar Material</button>
-                    <button id="usuarioPrestamosActivos" class="boton w90">Prestamos Activos</button>
+                    <!-- <button id="usuarioPrestamosActivos" class="boton w90">Prestamos Activos</button> -->
                     <?php
                     break;
                 //usuario administrador
@@ -29,13 +29,13 @@
                         <td>Rut:</td>
                     </tr>
                     <tr>
-                        <td><input type="text" name="usuarioIngresoModal" id="usuarioIngreso" /></td>
+                        <td><input type="text" name="rutIngreso" id="rutIngreso" /></td>
                     </tr>
                     <tr>
                         <td>Contrase&ntilde;a:</td>
                     </tr>
                     <tr>
-                        <td><input type="password" name="contrasenaIngresModal" id="contrasenaIngreso" /></td>
+                        <td><input type="password" name="contrasenaIngreso" id="contrasenaIngreso" /></td>
                     </tr>
                     <tr>
                         <td colspan="2" align="right"><span class="cargando" id="cargandoIngreso"></span><button id="botonIngreso" class="boton">Ingresar</button></td>
