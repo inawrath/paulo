@@ -16,5 +16,6 @@
 }
 
 #columnaNombre{
-    
+    overflow: hidden;
+    width: 150px;
 }
