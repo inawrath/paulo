@@ -13,9 +13,9 @@ while ($item = $listado->fetch()) {
     ?>
     <br/>
     <span>
-        <?php echo $item['nombre'] ?>
-        <?php echo $item['tipo'] ?>
-        <?php echo $item['autor'] ?>
+        <?php
+            print_r($item);
+        ?>
     </span>
     <?php
 }
