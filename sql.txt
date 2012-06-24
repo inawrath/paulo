@@ -28,9 +28,9 @@ editorial varchar(20),
 resumen varchar(100));
 
 create type material as object(
-id varchar(13),
+clasificacion varchar(10),
+id_material varchar(13),
 cantidad number,
-cantidad_prestamos number,
 descripcion publicacion_t,
 borrado_logico number);
 
