@@ -12,6 +12,8 @@ body{
     text-align: center;
 }
 
+td {vertical-align: top;}
+
 .oculto{
     display: none;
 }

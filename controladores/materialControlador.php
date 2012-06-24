@@ -24,7 +24,7 @@ class materialControlador extends baseControladores {
                 //Pasamos a la vista toda la informacion que se desea representar
                 $data['listado'] = $listado;
 
-                $this->vista->desplegar("administradorMateriales", "administradorMateriales.php",$data);
+                $this->vista->desplegar("administradorMateriales", "administradorMateriales.php", $data);
                 break;
             default:
                 break;
@@ -32,20 +32,31 @@ class materialControlador extends baseControladores {
     }
 
     public function nuevo() {
-        if(isset($_POST['submit'])){
+        if (isset($_POST['submit'])) {
             //crear insert
-            echo $_POST['nombre'].$_POST['tipo'].$_POST['resumen'];
-        }else{
+            echo $_POST['nombre'] . $_POST['tipo'] . $_POST['resumen'];
+        } else {
             $this->vista->desplegar("administradorNuevoMaterial", "administradorNuevoMaterial.php");
         }
     }
 
     public function editar($id) {
-        if(isset($_POST['submit'])){
+        if (isset($_POST['submit'])) {
             //aca hacemos el update
-        }else{
-            //buscar el material a editar e insertarlo en la tabla xD
-            $this->vista->desplegar("administradorEditarMaterial", "administradorEditarMaterial.php");
+        } else {
+            //Incluye el modelo que corresponde
+            require 'modelos/materialModelo.php';
+
+            //Creamos una instancia de nuestro "modelo"
+            $items = new materialModelo();
+
+            //Le pedimos al modelo todos los items usuarios
+            $listado = $items->materialEditar($id);
+
+            //Pasamos a la vista toda la informacion que se desea representar
+            $data['listado'] = $listado;
+
+            $this->vista->desplegar("administradorEditarMaterial", "administradorEditarMaterial.php", $data);
         }
     }
 

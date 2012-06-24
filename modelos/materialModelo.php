@@ -10,6 +10,14 @@ class materialModelo extends baseModelos {
         //devolvemos la coleccion para que la vista la presente.
         return $consulta;
     }
+    
+    public function materialEditar($id) {
+        $sentencia = 'SELECT * FROM materiales_tab WHERE id = :id ';
+        $consulta = $this->db->prepare($sentencia);
+        $consulta->bindParam(":id", $id);
+        $consulta->execute();
+        return $consulta;
+    }
 
 }
 

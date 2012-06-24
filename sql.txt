@@ -16,7 +16,7 @@ apellido_mat varchar(30),
 direccion direccion_t,
 telefono telefono_t,
 fecha_suspencion date,
-borrado_logico varchar(2));
+borrado_logico number);
 
 create type publicacion_t as object(
 nombre varchar(50),
@@ -29,8 +29,10 @@ resumen varchar(100));
 
 create type material as object(
 id varchar(13),
+cantidad number,
+cantidad_prestamos number,
 descripcion publicacion_t,
-borrado_logico varchar(2));
+borrado_logico number);
 
 create type devolucion as object(
 fecha_recepcion date,
@@ -85,23 +87,25 @@ nombre varchar(50),
 apellido_pat varchar(30),
 apellido_mat varchar(30),
 fecha_suspencion date,
-borrado_logico varchar(2)
+borrado_logico int
 );
 
 /*minda es la contrasena para jonathan e ivan*/
 INSERT INTO usuarios_tab
-VALUES ('175705228','cf5598d8fc96c663d19c242e5a3785706a322bc9',2,'Ivan','Nawrath','01/01/2011','11');
+VALUES ('175705228','cf5598d8fc96c663d19c242e5a3785706a322bc9',2,'Ivan','Nawrath','Castillo','01/01/2011',1);
 
 INSERT INTO usuarios_tab
-VALUES ('173947755','cf5598d8fc96c663d19c242e5a3785706a322bc9',2,'Jonathan','Fierro','Sandoval','01/01/2011','11');
+VALUES ('173947755','cf5598d8fc96c663d19c242e5a3785706a322bc9',2,'Jonathan','Fierro','Sandoval','01/01/2011',1);
 
 /*para user es 0 el rut y resu la contrasena*/
 INSERT INTO usuarios_tab
-VALUES ('0','3448744cb8797d4709803236a957a582c0b9e0a2',1,'usuario','normal','pollo','01/01/2011','11');
+VALUES ('0','3448744cb8797d4709803236a957a582c0b9e0a2',1,'usuario','normal','pollo','01/01/2011',1);
 
 
 create table materiales_tab(
 id varchar(13),
+cantidad int,
+cantidad_prestamos int,
 nombre varchar(50),
 tipo varchar(20),
 autor varchar (50),
@@ -109,10 +113,10 @@ edicion varchar(4),
 anio varchar(4),
 editorial varchar(20),
 resumen varchar(100),
-borrado_logico varchar(2));
+borrado_logico int);
 
 INSERT INTO materiales_tab
-VALUES ('001','php','Libro','internet','1','2012','internet','libro sobre php','11');
+VALUES ('001',2,1,'php','Libro','internet','1','2012','internet','libro sobre php','11');
 
 INSERT INTO materiales_tab
-VALUES ('002','mysql','Libro','internet','1','2012','internet','libro sobre mysql','11');
+VALUES ('002',1,0,'mysql','Libro','internet','1','2012','internet','libro sobre mysql','11');

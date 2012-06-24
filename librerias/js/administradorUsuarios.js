@@ -13,7 +13,7 @@ $(document).ready(function () {
     $('a.eliminar').click(function(e){
         e.preventDefault();
         var $id =$(this).attr('href');
-        var msg = confirm("Desea eliminar este dato?")
+        var msg = confirm("¿Desea eliminar este dato?")
 		if ( msg ) {
 			$.ajax({
 				url: url+"?controlador=usuario&accion=eliminar",

@@ -13,7 +13,7 @@ $(document).ready(function () {
     $('a.eliminar').click(function(e){
         e.preventDefault();
         var $id =$(this).attr('href');
-        var msg = confirm("Desea eliminar este dato?")
+        var msg = confirm("¿Desea eliminar este dato?")
 		if ( msg ) {
 			$.ajax({
 				url: url+"?controlador=material&accion=eliminar",
@@ -25,5 +25,19 @@ $(document).ready(function () {
 				}
 			});
 		}
+    });
+    $('input[@type=checkbox].activo').click(function(){
+        var $activo = $(this).is(':checked');
+        var $id = $(this).attr('value');
+        if($activo){
+            var msg = confirm("¿Desea activar este material?")
+            if(msg){
+                alert('activo el material con id'+$id);
+            }else{
+                $(this).attr('checked',false);
+            }
+        }else{
+            alert('bloqueado');
+        }
     });
 });
