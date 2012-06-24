@@ -13,9 +13,7 @@ class inicioControlador extends baseControladores {
                 $items = new inicioModelo();
 
                 //Le pedimos al modelo todos los items usuarios
-                $listado = $items->listarUsuarios();
-
-                print_r($listado);
+                $listado = $items->listarMateriales();
 
                 //Pasamos a la vista toda la informacion que se desea representar
                 $data['listado'] = $listado;
@@ -35,7 +33,7 @@ class inicioControlador extends baseControladores {
 
     public function nuevoUsuario() {
         $usuario = 'admin';
-        $password = 'minda';
+        $password = 'resu';
         $nombre = 'administrador';
         $tipo = 2;
         /* tipo:

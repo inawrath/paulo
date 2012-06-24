@@ -1,7 +1,7 @@
 inicio
 
 <br/>
-listado de usuarios:
+listado de Materiales:
 
 <?php
 // $listado es una variable asignada desde pruebaControlador $data['listado'] 
@@ -13,9 +13,9 @@ while ($item = $listado->fetch()) {
     ?>
     <br/>
     <span>
-        <?php echo $item['rut'] ?>
         <?php echo $item['nombre'] ?>
         <?php echo $item['tipo'] ?>
+        <?php echo $item['autor'] ?>
     </span>
     <?php
 }

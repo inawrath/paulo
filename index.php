@@ -20,37 +20,8 @@ class index {
             $variablesUrl['subId'] = '';
         }
 
-        /* if ($variablesUrl['controlador'] == 'aula' && $variablesUrl['accion'] == 'mostrar_num' && $variablesUrl['id'] == '') {
-
-          //header('Location: http://pagina.algo/error404.php');
-          header('Location: http://localhost/LAC/error404.php?error=id');
-          break;
-          }// */
-
         controlPrincipal::main($variablesUrl);
     }
-
-    private static function limpiar($valor) {
-        //permitimos solo letras(a-Z), numeros y guiones
-        return preg_replace('/[^a-zA-Z0-9-_]/', '', $valor);
-    }
-
-    private static function obtenerVariablesUrl($url) {
-        //quitamos la barra del final
-        $url = preg_replace('/\/$/', '', $url);
-
-        //separamos las partes/variables de la url y las contamos
-        $variables = explode('/', $url);
-        $cantVariables = count($variables);
-        //limpiamos y acumulamos las variables
-        for ($i = 0; $i < $cantVariables; $i++) {
-            //Acumulamos los valores en un arreglo
-            $variables[$i] = index::limpiar($variables[$i]);
-        }
-
-        return $variables;
-    }
-
 }
 
 /* * * */

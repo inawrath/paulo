@@ -31,7 +31,7 @@ $(document).ready(function(){
                     data: 'rut=' + $rut.val() + '&contrasena=' + $contrasena.val(),
                     success:function(msj){
                         //probar resultado que devuelve
-                        alert(msj);
+                        //alert(msj);
                         if ( msj == 1 ){
                             $alerta.html('<div class="cajaCorrecta"></div>');
                             $('.cajaCorrecta').hide(0).html('Espera un momento&#133;');
@@ -68,30 +68,6 @@ $(document).ready(function(){
         return false;
 		
     });
-	
-	
-	
-    $('#salir').click(function(){
-        /*$('#cargando').fadeIn(200);
-        $('#alertasUsuario').html('<div class="cajaCorrecta"><img src="'+url+'img/cargando.gif"/> Espera un momento&#133;</div>');
-        //$('.cajaCorrecta').slideDown(timeSlide);
-        //muestro la cajaCorrecta de salida al estilo modal
-        $('#alertasUsuario').modal({
-            //nombre para el container
-            containerId:'modalTiempo',
-            //funcion de animacion al abrir la cajaCorrecta
-            onOpen: function (dialog) {
-                dialog.overlay.fadeIn('fast', function () {
-                    dialog.container.fadeIn('fast', function () {
-                        dialog.data.slideDown('fast');
-                    });
-                });
-            }
-        });//*/
-        //setTimeout(function(){
-        window.location.href = url+"?controlador=usuario&accion=salir";
-        //},2500);
-    });	
     
     /*menu usuario*/
     $('#usuarioBuscaMaterial').click(function(){

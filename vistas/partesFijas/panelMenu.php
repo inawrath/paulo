@@ -1,7 +1,7 @@
 <nav id="panelMenu" class="grid_4 yellow">
     <div id="contenedorMenu">
         <?php
-        if (isset($_SESSION['ACCESO']) && isset($_SESSION['userid']) && $_SESSION['userid'] != '0') {
+        if (isset($_SESSION['ACCESO']) && isset($_SESSION['userid']) && $_SESSION['userid'] != '') {
             switch ($_SESSION['tipo']) {
                 //usuario normal
                 case 1:

@@ -9,7 +9,7 @@ class materialControlador extends baseControladores {
     public function listar() {
         switch ($_SESSION['tipo']) {
             case 1:
-                $this->vista->desplegar("usuario", "usuario.php");
+                $this->vista->desplegar("usuario", "usuarioBuscaMaterial.php");
                 break;
             case 2:
                 //Incluye el modelo que corresponde
@@ -19,7 +19,7 @@ class materialControlador extends baseControladores {
                 $items = new materialModelo();
 
                 //Le pedimos al modelo todos los items usuarios
-                $listado = $items->listarMaterial();
+                $listado = $items->listarMateriales();
 
                 //Pasamos a la vista toda la informacion que se desea representar
                 $data['listado'] = $listado;
@@ -32,15 +32,26 @@ class materialControlador extends baseControladores {
     }
 
     public function nuevo() {
-        $this->vista->desplegar("administradorEditarMaterial", "administradorNuevoMaterial.php");
+        if(isset($_POST['submit'])){
+            //crear insert
+            echo $_POST['nombre'].$_POST['tipo'].$_POST['resumen'];
+        }else{
+            $this->vista->desplegar("administradorNuevoMaterial", "administradorNuevoMaterial.php");
+        }
     }
 
-    public function editar() {
-        $this->vista->desplegar("administradorEditarMaterial", "administradorEditarMaterial.php");
+    public function editar($id) {
+        if(isset($_POST['submit'])){
+            //aca hacemos el update
+        }else{
+            //buscar el material a editar e insertarlo en la tabla xD
+            $this->vista->desplegar("administradorEditarMaterial", "administradorEditarMaterial.php");
+        }
     }
 
-    public function elimina() {
-        //borrado logico
+    public function eliminar($id) {
+        //borrado logico y respuesta resultado
+        echo $id;
     }
 
 }
