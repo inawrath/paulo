@@ -2,7 +2,7 @@
 $config = config::singleton();
 
 /*Base de Datos ORACLE*/
-$config->guardarVariable('driver', 'oci');
+/*$config->guardarVariable('driver', 'oci');
 $config->guardarVariable('dbhost', 'localhost');
 $config->guardarVariable('dbname', 'XE');
 $config->guardarVariable('dbuser', 'SYSTEM');
@@ -10,7 +10,7 @@ $config->guardarVariable('dbpass', 'oracle');
 //*/
 
 /*base de datos de pruebas*/
-/*$config->guardarVariable('driver', 'mysql');
+$config->guardarVariable('driver', 'mysql');
 $config->guardarVariable('dbhost', 'localhost');
 $config->guardarVariable('dbname', 'prueba');
 $config->guardarVariable('dbuser', 'root');
@@ -40,7 +40,7 @@ $config->guardarVariable('carpetaVistas', 'vistas/');
 //Carpetas de estilos y script propios y externos
 $config->guardarVariable('carpetaCss',$config->obtenerVariable('url').'librerias/css/');
 $config->guardarVariable('carpetaJs',$config->obtenerVariable('url').'librerias/js/');
-$config->guardarVariable('carpetaExt',$config->obtenerVariable('url').'librerias/externas/');
+$config->guardarVariable('carpetaExt',$config->obtenerVariable('url').'librerias/ext/');
 
 $config->guardarVariable('Favicon',$config->obtenerVariable('url').'img/favicon.ico');
 ?>

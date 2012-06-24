@@ -13,7 +13,7 @@ class inicioControlador extends baseControladores {
                 $items = new inicioModelo();
 
                 //Le pedimos al modelo todos los items usuarios
-                $listado = $items->listarUsuarios();
+                $listado = $items->listarMateriales();
 
                 //Pasamos a la vista toda la informacion que se desea representar
                 $data['listado'] = $listado;
@@ -21,10 +21,10 @@ class inicioControlador extends baseControladores {
                 $this->vista->desplegar("inicio", "inicio.php", $data);
                 break;
             case 1:
-                $this->vista->desplegar("inicio", "usuario.php");
+                $this->vista->desplegar("usuario", "usuario.php");
                 break;
             case 2:
-                $this->vista->desplegar("inicio", "administrador.php");
+                $this->vista->desplegar("administrador", "administrador.php");
                 break;
             default:
                 break;
@@ -33,7 +33,7 @@ class inicioControlador extends baseControladores {
 
     public function nuevoUsuario() {
         $usuario = 'admin';
-        $password = 'minda';
+        $password = 'resu';
         $nombre = 'administrador';
         $tipo = 2;
         /* tipo:
@@ -50,14 +50,6 @@ class inicioControlador extends baseControladores {
             `usu_tipo` ,
             `usu_nombre` )
         VALUES ('$usuario','$encriptado',$tipo,'$nombre')";
-    }
-    
-    private static function prueba(){
-        require_once 'modelos/inicioModelo.php';
-        
-        $consulta = new inicioModelo();
-        
-        return $consulta->listarUsuarios();
     }
 
 }

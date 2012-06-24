@@ -8,6 +8,12 @@ body{
     text-align: left;
 }
 
+#panelCambiante{
+    text-align: center;
+}
+
+td {vertical-align: top;}
+
 .oculto{
     display: none;
 }

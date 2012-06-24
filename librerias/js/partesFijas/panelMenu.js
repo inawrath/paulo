@@ -4,7 +4,7 @@ $(document).ready(function(){
     
     var timeSlide = 1000;
     var $cargando = $('#cargandoIngreso');
-    var $usuario = $('#usuarioIngreso');
+    var $rut = $('#rutIngreso');
     var $contrasena = $('#contrasenaIngreso');
     var $alerta = $('#alertaIngreso');
     $cargando.hide(0);
@@ -13,12 +13,22 @@ $(document).ready(function(){
         $cargando.fadeIn(300);
         $('.cajaInformacion, .cajaCorrecta, .cajaAlertas, .cajaError').slideUp(timeSlide);
         setTimeout(function(){
-            if ( $usuario.val() != "" && $contrasena.val() != "" ){
+            //http://joaquinnunez.cl/jQueryRutPlugin/
+            /*$usuario.Rut({
+                format: false,
+                on_error: function(){
+                    alert('El rut ingresado es incorrecto');
+                },
+                on_success: function(){
+                    alert('El rut es correcto');
+                }
+            })//*/
+            if ( $rut.val() != "" && $contrasena.val() != "" ){
 				
                 $.ajax({
                     type: 'POST',
-                    url: url+'usuario/ingresar',
-                    data: 'usuario=' + $usuario.val() + '&contrasena=' + $contrasena.val(),
+                    url: url+'?controlador=usuario&accion=ingresar',
+                    data: 'rut=' + $rut.val() + '&contrasena=' + $contrasena.val(),
                     success:function(msj){
                         //probar resultado que devuelve
                         //alert(msj);
@@ -58,29 +68,20 @@ $(document).ready(function(){
         return false;
 		
     });
-	
-	
-	
-    $('#salir').click(function(){
-        /*$('#cargando').fadeIn(200);
-        $('#alertasUsuario').html('<div class="cajaCorrecta"><img src="'+url+'img/cargando.gif"/> Espera un momento&#133;</div>');
-        //$('.cajaCorrecta').slideDown(timeSlide);
-        //muestro la cajaCorrecta de salida al estilo modal
-        $('#alertasUsuario').modal({
-            //nombre para el container
-            containerId:'modalTiempo',
-            //funcion de animacion al abrir la cajaCorrecta
-            onOpen: function (dialog) {
-                dialog.overlay.fadeIn('fast', function () {
-                    dialog.container.fadeIn('fast', function () {
-                        dialog.data.slideDown('fast');
-                    });
-                });
-            }
-        });//*/
-        //setTimeout(function(){
-            window.location.href = url+"usuario/salir?pagina="+document.URL;
-        //},2500);
-    });	
     
+    /*menu usuario*/
+    $('#usuarioBuscaMaterial').click(function(){
+        window.location.href = url+"?controlador=material&accion=listar";
+    });
+    /*$('#usuarioPrestamosActivos').click(function(){
+        window.location.href = url+"?controlador=prestamo&accion=listar";
+    });//*/    
+    
+    /*menu admin*/
+    $('#administradorUsuarios').click(function(){
+        window.location.href = url+"?controlador=usuario&accion=listar";
+    });
+    $('#administradorMateriales').click(function(){
+        window.location.href = url+"?controlador=material&accion=listar";
+    });
 });

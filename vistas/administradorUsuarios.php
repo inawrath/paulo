@@ -1,7 +1,7 @@
-inicio
-
 <br/>
-listado de Materiales:
+listado de usuarios:
+<br/>
+<button id="agregarNuevoUsuario" class="boton">Agregar Nuevo Usuario</button>
 
 <?php
 // $listado es una variable asignada desde pruebaControlador $data['listado'] 
@@ -13,9 +13,11 @@ while ($item = $listado->fetch()) {
     ?>
     <br/>
     <span>
+        <?php echo $item['rut'] ?>
         <?php echo $item['nombre'] ?>
         <?php echo $item['tipo'] ?>
-        <?php echo $item['autor'] ?>
+        <a href="<?php echo $item['rut'] ?>" class="editar boton">editar</a>
+        <a href="<?php echo $item['rut'] ?>" class="eliminar boton">eliminar</a>
     </span>
     <?php
 }

@@ -25,21 +25,21 @@ class baseVistas {
                 $$key = $value;
             }
         }
-
+        /* html */
         echo '<!DOCTYPE html>'
         . '<html>';
-
+        echo '<head>';
         header::metasLibrerias($pagina);
-
+        echo '</head>';
         /*         * ********************************** */
         echo '<body>';
         echo '<div class="container_20">';
         //incluimos el panelSuperior
         include $config->obtenerVariable('carpetaVistas') . 'partesFijas/panelSuperior.php';
-        
+
         //incluimos el panel Menu, depende del usuario si esta registrado
         include $config->obtenerVariable('carpetaVistas') . 'partesFijas/panelMenu.php';
-        
+
         //panel-cambiante lleva cada cosa distinta dependiendo del nombre
         echo '<section id="panelCambiante" class="grid_16 blue">';
         include $vistaHtml;
@@ -47,14 +47,17 @@ class baseVistas {
         echo '<div class="clear"></div>';
         
         echo '</div>'; //fin container
-    
+
         echo '</body>';
         /*         * **************************************** */
 
         echo '</html>';
+
+        /* html */
     }
 
 }
+
 /*
   El uso es bastante sencillo:
   $vista = new BaseVistas();
