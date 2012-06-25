@@ -3,7 +3,7 @@
 <button id="agregarNuevoMaterial" class="boton">Agregar Nuevo Material</button>
 <br/>
 <br/>
-<table align="center">
+<table align="center" class="bordered">
     <tr> 
         <th>Nombre</th><th>Tipo</th><th>Resumen</th><th>Editar</th><th>Eliminar</th>
     </tr>

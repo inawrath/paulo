@@ -24,25 +24,23 @@
         } else {
             $_SESSION['ACCESO'] = FALSE;
             ?>
-            <form method="post" action="">
-                <table cellpadding="0" cellspacing="0" border="0" align="center">
-                    <tr>
-                        <td>Rut:</td>
-                    </tr>
-                    <tr>
-                        <td><input type="text" name="rutIngreso" id="rutIngreso" /></td>
-                    </tr>
-                    <tr>
-                        <td>Contrase&ntilde;a:</td>
-                    </tr>
-                    <tr>
-                        <td><input type="password" name="contrasenaIngreso" id="contrasenaIngreso" /></td>
-                    </tr>
-                    <tr>
-                        <td colspan="2" align="right"><span class="cargando" id="cargandoIngreso"></span><button id="botonIngreso" class="boton">Ingresar</button></td>
-                    </tr>
-                </table>
-            </form>
+            <table cellpadding="0" cellspacing="0" border="0" align="center">
+                <tr>
+                    <td>Rut:</td>
+                </tr>
+                <tr>
+                    <td><input type="text" name="rutIngreso" id="rutIngreso" /></td>
+                </tr>
+                <tr>
+                    <td>Contrase&ntilde;a:</td>
+                </tr>
+                <tr>
+                    <td><input type="password" name="contrasenaIngreso" id="contrasenaIngreso" /></td>
+                </tr>
+                <tr>
+                    <td colspan="2" align="right"><span class="cargando" id="cargandoIngreso"></span><button id="botonIngreso" class="boton">Ingresar</button></td>
+                </tr>
+            </table>
             <div id="alertaIngreso">
             </div>
             <?php

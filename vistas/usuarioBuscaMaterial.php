@@ -1,8 +1,8 @@
 <h1>Materiales</h1>
 
-<table align="center">
+<table align="center" class="bordered">
     <tr> 
-        <th>Nombre</th><th>Tipo</th><th>Resumen</th><td>Copias disponibles</td><th>Solicitar Prestamo</th>
+        <th>Nombre</th><th>Tipo</th><th>Resumen</th><th>Copias disponibles</th><th>Solicitar Prestamo</th>
     </tr>
     <?php
     while ($item = $listado->fetch()) {

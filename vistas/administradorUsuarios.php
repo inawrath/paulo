@@ -3,7 +3,7 @@
 <button id="agregarNuevoUsuario" class="boton">Agregar Nuevo Usuario</button>
 <br/>
 <br/>
-<table align="center">
+<table align="center" class="bordered">
     <tr> 
         <th>Rut</th><th>Nombre</th><th>Tipo</th><th>Editar</th><th>Eliminar</th>
     </tr>
