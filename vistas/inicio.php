@@ -1,6 +1,6 @@
 <h1>Listado de Materiales:</h1>
 
-<table align="center">
+<table align="center" class="bordered">
     <tr> 
         <th>Nombre</th><th>Tipo</th><th>Resumen</th>
     </tr>

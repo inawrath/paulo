@@ -1,4 +1,11 @@
 #contenedorMenu{
+    border: 1px solid gainsboro;
+    padding-top: 10px;
+    padding-bottom: 10px;
     margin-top: 10px;
     margin-bottom: 10px;
+    border-radius:5px; 
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    behavior: url(ieCss3.htc);
 }
