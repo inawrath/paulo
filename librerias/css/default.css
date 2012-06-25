@@ -12,7 +12,10 @@ body{
     text-align: center;
 }
 
-td {vertical-align: top;}
+td {
+    vertical-align: top;
+    text-align: left;
+}
 
 .oculto{
     display: none;

@@ -1,1 +1,1 @@
-Bienvenido <?= $_SESSION['username']; ?>
+<h1>Bienvenido <?= $_SESSION['username']; ?></h1>

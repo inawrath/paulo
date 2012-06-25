@@ -7,8 +7,8 @@ $(document).ready(function () {
     });
     $('a.editar').click(function(e){
         e.preventDefault();
-        var $id =$(this).attr('href');
-        window.location.href = url+"?controlador=usuario&accion=editar&id="+$id;
+        var $rut =$(this).attr('href');
+        window.location.href = url+"?controlador=usuario&accion=editar&id="+$rut;
     });
     $('a.eliminar').click(function(e){
         e.preventDefault();
@@ -17,6 +17,22 @@ $(document).ready(function () {
 		if ( msg ) {
 			$.ajax({
 				url: url+"?controlador=usuario&accion=eliminar",
+				type: "GET",
+				data: "id="+$id,
+				success: function(datos){
+					alert(datos);
+					//$("#fila-"+cliente_id).remove();
+				}
+			});
+		}
+    });    
+    $('a.activar').click(function(e){
+        e.preventDefault();
+        var $id =$(this).attr('href');
+        var msg = confirm("¿Desea activar este dato?")
+		if ( msg ) {
+			$.ajax({
+				url: url+"?controlador=usuario&accion=activar",
 				type: "GET",
 				data: "id="+$id,
 				success: function(datos){

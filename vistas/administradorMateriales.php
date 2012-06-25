@@ -1,25 +1,30 @@
-<br/>
-listado de Materiales:
-<br/>
-<button id="agregarNuevoMaterial" class="boton">Agregar Nuevo Material</button>
+<h1>Listado de Materiales:</h1>
 
-<?php
-// $listado es una variable asignada desde pruebaControlador $data['listado'] 
-// la cual se le pasa a base vistas la cual hace la conversion a $listado
-for ($index = 0; $index < 3; $index++) {
-    echo '<br/>';
-}
-while ($item = $listado->fetch()) {
-    ?>
-    <br/>
-    <span>
-        <?php echo $item['nombre'] ?>
-        <?php echo $item['tipo'] ?>
-        <?php echo $item['autor'] ?>
-        <input type="checkbox" name="activo" class="activo" value="<?php echo $item['id'] ?>" <?php echo "checked=\"checked\""?>/>
-        <a href="<?php echo $item['id'] ?>" class="editar boton">editar</a>
-        <a href="<?php echo $item['id'] ?>" class="eliminar boton">eliminar</a>
-    </span>
+<button id="agregarNuevoMaterial" class="boton">Agregar Nuevo Material</button>
+<br/>
+<br/>
+<table align="center">
+    <tr> 
+        <th>Nombre</th><th>Tipo</th><th>Resumen</th><th>Editar</th><th>Eliminar</th>
+    </tr>
     <?php
-}
-?>
+    while ($item = $listado->fetch()) {
+        ?>
+        <tr>
+            <td><?= $item['nombre'] ?></td><td><?= $item['tipo'] ?></td><td><?= $item['resumen'] ?></td>
+            <?php
+            if ($item['borrado_logico'] == 0) {
+                ?>
+                <td colspan="2"><a href="<?php echo $item['id'] ?>" class="activar boton">Activar</a></td>
+                <?php
+            } else {
+                ?>
+                <td><a href="<?php echo $item['id'] ?>" class="editar boton">editar</a></td><td><a href="<?php echo $item['id'] ?>" class="eliminar boton">eliminar</a></td>
+                <?php
+            }
+            ?>
+        </tr>
+        <?php
+    }
+    ?>
+</table>

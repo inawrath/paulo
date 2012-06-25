@@ -11,7 +11,7 @@ class materialModelo extends baseModelos {
         return $consulta;
     }
     
-    public function materialEditar($id) {
+    public function datosMaterial($id) {
         $sentencia = 'SELECT * FROM materiales_tab WHERE id = :id ';
         $consulta = $this->db->prepare($sentencia);
         $consulta->bindParam(":id", $id);

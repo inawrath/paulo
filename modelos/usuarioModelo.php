@@ -14,10 +14,10 @@ class usuarioModelo extends baseModelos {
         return $consulta;
     }
 
-    public function datosUsuario($idUsuario) {
-        $sentencia = 'SELECT * FROM usuarios WHERE usu_id = :id ';
+    public function usuarioEditar($rut) {
+        $sentencia = 'SELECT * FROM usuarios_tab t WHERE t.rut = :rut';
         $consulta = $this->db->prepare($sentencia);
-        $consulta->bindParam(":id", $idUsuario);
+        $consulta->bindParam(":rut", $rut);
         $consulta->execute();
         return $consulta;
     }

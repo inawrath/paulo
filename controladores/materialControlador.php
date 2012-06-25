@@ -7,23 +7,23 @@ class materialControlador extends baseControladores {
     }
 
     public function listar() {
+        //Incluye el modelo que corresponde
+        require 'modelos/materialModelo.php';
+
+        //Creamos una instancia de nuestro "modelo"
+        $items = new materialModelo();
+
+        //Le pedimos al modelo todos los items usuarios
+        $listado = $items->listarMateriales();
+
+        //Pasamos a la vista toda la informacion que se desea representar
+        $data['listado'] = $listado;
+
         switch ($_SESSION['tipo']) {
             case 1:
-                $this->vista->desplegar("usuario", "usuarioBuscaMaterial.php");
+                $this->vista->desplegar("usuarioBuscaMaterial", "usuarioBuscaMaterial.php", $data);
                 break;
             case 2:
-                //Incluye el modelo que corresponde
-                require 'modelos/materialModelo.php';
-
-                //Creamos una instancia de nuestro "modelo"
-                $items = new materialModelo();
-
-                //Le pedimos al modelo todos los items usuarios
-                $listado = $items->listarMateriales();
-
-                //Pasamos a la vista toda la informacion que se desea representar
-                $data['listado'] = $listado;
-
                 $this->vista->desplegar("administradorMateriales", "administradorMateriales.php", $data);
                 break;
             default:
@@ -51,7 +51,7 @@ class materialControlador extends baseControladores {
             $items = new materialModelo();
 
             //Le pedimos al modelo todos los items usuarios
-            $listado = $items->materialEditar($id);
+            $listado = $items->datosMaterial($id);
 
             //Pasamos a la vista toda la informacion que se desea representar
             $data['listado'] = $listado;
@@ -63,6 +63,25 @@ class materialControlador extends baseControladores {
     public function eliminar($id) {
         //borrado logico y respuesta resultado
         echo $id;
+    }
+
+    public function activar($id) {
+        //borrado logico y respuesta resultado
+        echo $id;
+    }
+
+    public function solicitarPrestamo($id) {
+        /* realizar las acciones pertinentes al prestamo */
+        echo 1;
+    }
+
+    public function devolucion() {
+        if (isset($_POST['submit'])) {
+            /* realizar las acciones pertinentes a la devolucion */
+            echo $_POST['id'];
+        } else {
+            $this->vista->desplegar("administradorDevolucionMaterial", "administradorDevolucionMaterial.php");
+        }
     }
 
 }

@@ -58,18 +58,35 @@ class usuarioControlador extends BaseControladores {
         }
     }
 
-    public function editar($id) {
-        echo $id;
+    public function editar($rut) {
+        //echo $id;
         if (isset($_POST['submit'])) {
             //crear update
         } else {
-            $this->vista->desplegar('administradorEditarUsuario', 'administradorEditarUsuario.php');
+            //Incluye el modelo que corresponde
+            require 'modelos/usuarioModelo.php';
+
+            //Creamos una instancia de nuestro 'modelo'
+            $items = new usuarioModelo();
+
+            //Le pedimos al modelo todos los items usuarios
+            $listado = $items->usuarioEditar($rut);
+
+            //Pasamos a la vista toda la informacion que se desea representar
+            $data['listado'] = $listado;
+
+            $this->vista->desplegar('administradorEditarUsuario', 'administradorEditarUsuario.php',$data);
         }
     }
 
-    public function eliminar($id) {
+    public function eliminar($rut) {
         //borrado logico
-        echo $id;
+        echo $rut;
+    }
+
+    public function activar($rut) {
+        //borrado logico
+        echo $rut;
     }
 
 }

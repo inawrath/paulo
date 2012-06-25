@@ -32,7 +32,7 @@
             <td>Resumen:</td><td><textarea id="resumenMaterial"><?php echo $item['resumen'] ?></textarea></td>
         </tr>
         <tr>
-            <td><button id="guardarNuevoMaterial" class="boton">Guardar Nuevo Material</button></td><td><button id="cancelar" class="boton">cancelar</button></td>
+            <td></td><td><button id="guardarNuevoMaterial" class="boton">Guardar Nuevo Material</button></td><td><button id="cancelarActualizarMaterial" class="boton">cancelar</button></td>
         </tr>
     <?php
     }

@@ -1,24 +1,30 @@
-<br/>
-listado de usuarios:
-<br/>
-<button id="agregarNuevoUsuario" class="boton">Agregar Nuevo Usuario</button>
+<h1>Listado de Usuarios:</h1>
 
-<?php
-// $listado es una variable asignada desde pruebaControlador $data['listado'] 
-// la cual se le pasa a base vistas la cual hace la conversion a $listado
-for ($index = 0; $index < 3; $index++) {
-    echo '<br/>';
-}
-while ($item = $listado->fetch()) {
-    ?>
-    <br/>
-    <span>
-        <?php echo $item['rut'] ?>
-        <?php echo $item['nombre'] ?>
-        <?php echo $item['tipo'] ?>
-        <a href="<?php echo $item['rut'] ?>" class="editar boton">editar</a>
-        <a href="<?php echo $item['rut'] ?>" class="eliminar boton">eliminar</a>
-    </span>
+<button id="agregarNuevoUsuario" class="boton">Agregar Nuevo Usuario</button>
+<br/>
+<br/>
+<table align="center">
+    <tr> 
+        <th>Rut</th><th>Nombre</th><th>Tipo</th><th>Editar</th><th>Eliminar</th>
+    </tr>
     <?php
-}
-?>
+    while ($item = $listado->fetch()) {
+        ?>
+        <tr>
+            <td><?= $item['rut'] ?></td><td><?= $item['nombre'] ?></td><td><?= $item['tipo'] ?></td>
+            <?php
+            if ($item['borrado_logico'] == 0) {
+                ?>
+                <td colspan="2"><a href="<?php echo $item['rut'] ?>" class="activar boton">Activar</a></td>
+                <?php
+            } else {
+                ?>
+                <td><a href="<?php echo $item['rut'] ?>" class="editar boton">editar</a></td><td><a href="<?php echo $item['rut'] ?>" class="eliminar boton">eliminar</a></td>
+                <?php
+            }
+            ?>
+        </tr>
+        <?php
+    }
+    ?>
+</table>

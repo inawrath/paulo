@@ -1,22 +1,16 @@
-inicio
+<h1>Listado de Materiales:</h1>
 
-<br/>
-listado de Materiales:
-
-<?php
-// $listado es una variable asignada desde pruebaControlador $data['listado'] 
-// la cual se le pasa a base vistas la cual hace la conversion a $listado
-for ($index = 0; $index < 3; $index++) {
-    echo '<br/>';
-}
-while ($item = $listado->fetch()) {
-    ?>
-    <br/>
-    <span>
-        <?php
-            print_r($item);
-        ?>
-    </span>
+<table align="center">
+    <tr> 
+        <th>Nombre</th><th>Tipo</th><th>Resumen</th>
+    </tr>
     <?php
-}
-?>
+    while ($item = $listado->fetch()) {
+        ?>
+        <tr>
+            <td><?= $item['nombre'] ?></td><td><?= $item['tipo'] ?></td><td><?= $item['resumen'] ?></td>
+        </tr>
+        <?php
+    }
+    ?>
+</table>

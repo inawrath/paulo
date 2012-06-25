@@ -20,8 +20,8 @@ $(document).ready(function () {
             url: url+'?controlador=material&accion=nuevo',
             type: 'POST',
             data: 'submit=&nombre='+$nombre+'&tipo='+$tipo+'&resumen='+$resumen,
-            success: function(datos){
-                alert(datos);
+            success: function(respuesta){
+                alert(respuesta);
                 //imprimir un mensaje de correcto o no xD
             },
             error: function(){
