@@ -84,6 +84,9 @@ class materialControlador extends baseControladores {
         }
     }
 
+    public function listarPrestamos(){
+        $this->vista->desplegar("administradorListarPrestamos", "administradorListarPrestamos.php");
+    }
 }
 
 ?>

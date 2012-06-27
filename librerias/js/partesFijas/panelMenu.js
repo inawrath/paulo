@@ -84,6 +84,9 @@ $(document).ready(function(){
     $('#administradorMateriales').click(function(){
         window.location.href = url+"?controlador=material&accion=listar";
     });
+    $('#administradorListarPrestamos').click(function(){
+        window.location.href = url+"?controlador=material&accion=listarPrestamos";
+    });
     $('#administradorDevolucionMaterial').click(function(){
         window.location.href = url+"?controlador=material&accion=devolucion";
     });

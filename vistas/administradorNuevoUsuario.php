@@ -1,5 +1,5 @@
 <h1>Ingrese datos Usuario Nuevo</h1>
-<table align="center">
+<table align="center"  class="tablaEntrada">
     <tr>
         <td>Rut:</td><td colspan="2"><input id="rutUsuario" /></td>
     </tr>
