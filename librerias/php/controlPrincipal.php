@@ -61,7 +61,6 @@ class controlPrincipal {
                     $permiso = autentificacion::usuario($variablesURL);
                     break;
                 case 2:
-                    //echo '$permiso';
                     $permiso = autentificacion::administrador($variablesURL);
                     break;
                 default:

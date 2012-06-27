@@ -14,7 +14,7 @@ $(document).ready(function(){
         $('.cajaInformacion, .cajaCorrecta, .cajaAlertas, .cajaError').slideUp(timeSlide);
         setTimeout(function(){
             //http://joaquinnunez.cl/jQueryRutPlugin/
-            /*$usuario.Rut({
+            /*$rut.Rut({
                 format: false,
                 on_error: function(){
                     alert('El rut ingresado es incorrecto');

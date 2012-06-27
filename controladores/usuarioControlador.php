@@ -13,9 +13,9 @@ class usuarioControlador extends BaseControladores {
         $datosUsuario = $usuarios->encontrarUsuario($_POST['rut'], $_POST['contrasena']);
         $n = 0;
         while ($item = $datosUsuario->fetch()) {
-            $_SESSION['username'] = $item['nombre'];
-            $_SESSION['userid'] = $item['rut'];
-            $_SESSION['tipo'] = $item['tipo'];
+            $_SESSION['username'] = $item['NOMBRE'];
+            $_SESSION['userid'] = $item['RUT'];
+            $_SESSION['tipo'] = $item['TIPO'];
             $_SESSION['acceso'] = true;
 
             $n++;
@@ -52,7 +52,17 @@ class usuarioControlador extends BaseControladores {
     public function nuevo() {
         if (isset($_POST['submit'])) {
             //crear insert
-            echo $_POST['rut'] . $_POST['contrasena'] . $_POST['tipo'] . $_POST['nombre'];
+            require_once 'modelos/usuarioModelo.php';
+            require_once 'inicioControlador.php';
+
+            if (inicioControlador::valida_rut($_POST['rut'])) {
+                $insertar = new usuarioModelo();
+                $insertado = $insertar->insertarUsuario($_POST);
+                echo $insertado;
+                //*/
+            } else {
+                echo 3;
+            }
         } else {
             $this->vista->desplegar('administradorNuevoUsuario', 'administradorNuevoUsuario.php');
         }
@@ -61,7 +71,18 @@ class usuarioControlador extends BaseControladores {
     public function editar($rut) {
         //echo $id;
         if (isset($_POST['submit'])) {
-            //crear update
+            //print_r($_POST);
+            if ($_POST['rut'] != "" && $_POST['rut'] == $rut) {
+                require_once 'inicioControlador.php';
+                if (inicioControlador::valida_rut($_POST['rut'])) {
+                    require_once 'modelos/usuarioModelo.php';
+                    $actualizar = new usuarioModelo();
+                    $actualizado = $actualizar->actualizarUsuario($_POST);
+                    echo $actualizado;
+                } else {
+                    echo 3;
+                }
+            }//*/
         } else {
             //Incluye el modelo que corresponde
             require 'modelos/usuarioModelo.php';
@@ -70,12 +91,12 @@ class usuarioControlador extends BaseControladores {
             $items = new usuarioModelo();
 
             //Le pedimos al modelo todos los items usuarios
-            $listado = $items->usuarioEditar($rut);
+            $listado = $items->editarUsuario($rut);
 
             //Pasamos a la vista toda la informacion que se desea representar
             $data['listado'] = $listado;
 
-            $this->vista->desplegar('administradorEditarUsuario', 'administradorEditarUsuario.php',$data);
+            $this->vista->desplegar('administradorEditarUsuario', 'administradorEditarUsuario.php', $data);
         }
     }
 

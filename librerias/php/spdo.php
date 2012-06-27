@@ -14,7 +14,7 @@ class spdo extends PDO {
             $conexion .= ';port=' . $config->obtenerVariable('port');
         }
 
-        parent::__construct($conexion, $config->obtenerVariable('dbuser'), $config->obtenerVariable('dbpass')/* , $config->obtenerVariable('options') */);
+        parent::__construct($conexion, $config->obtenerVariable('dbuser'), $config->obtenerVariable('dbpass') , $config->obtenerVariable('options') );
     }
 
     public static function singleton() {

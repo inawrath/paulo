@@ -34,8 +34,9 @@ cantidad number,
 descripcion publicacion_t,
 borrado_logico number);
 
-create type devolucion as object(
-fecha_recepcion date,
+create or replace type devolucion as object(
+id integer,
+fecha_recepcion timestamp,
 id_material ref material,
 rut_usuario ref usuario);
 
@@ -45,6 +46,9 @@ fecha_devolucion date,
 id_mat ref material,
 rut_u ref usuario);
 
+create or replace type copia as object(
+
+);
 
 create table usuarios_tab of usuario(
 rut primary key);
@@ -53,6 +57,9 @@ rut primary key);
 create table materiales_tab of material(
 id_material primary key);
 
+create table devolucion_tab of devolucion(
+primary key(fecha_recepcion, id_material, rut_usuario)
+);
 
 /*INSERTAR EN LA TABLA usuarios_tab para ivan y jona minda es la contrasena*/
 INSERT INTO usuarios_tab
@@ -60,10 +67,18 @@ VALUES ('175705228','cf5598d8fc96c663d19c242e5a3785706a322bc9',2,'Ivan','Nawrath
 
 INSERT INTO usuarios_tab
 VALUES ('173947755','cf5598d8fc96c663d19c242e5a3785706a322bc9',2,'Jonathan','Fierro','Sandoval',direccion_t('Santa Amalia',42,'Lirquen',3) ,telefono_t('879879'),'01/01/2011','11');
+
+INSERT INTO materiales_tab
+VALUES('1234567890','1234567890123',10,publicacion_t('libro 1','libro','autor 1', '1990', '1990', 'editorial 1', 'resumen 2'),1);
+
 /*SE DEBEN INSERTAR TODOS LOS PARAMETROS*/
 
 /*REALIZAR UNA CONSULTA*/
 SELECT t.rut, t.contrasena, t.nombre, t.apellido_pat, t.apellido_mat, t.direccion.calle, t.direccion.numero, t.direccion.ciudad, t.direccion.region, t.fecha_suspencion, t.borrado_logico FROM usuarios_tab t;
+
+SELECT m.clasificacion, m.id_material, m.cantidad, m.borrado_logico, m.descripcion.nombre, m.descripcion.tipo, m.descripcion.autor, m.descripcion.edicion, m.descripcion.año, m.descripcion.editorial, m.descripcion.ficha_resumen
+FROM materiales_tab m;
+
 /*Si quieres acceder a un atributo que esta compuesto por un objeto, debes llamar al objeto (en este caso direccion), y luego debes ingresar el atributo (en este caso, el atributo de direccion es calle) */
 
 /*REALIZAR UNA ACTUALIZACION*/
