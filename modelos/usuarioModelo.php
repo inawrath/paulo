@@ -6,7 +6,7 @@ class usuarioModelo extends baseModelos {
 //realizamos la consulta de todos los items
 //SELECT t.rut, t.contrasena FROM usuarios_tab t where t.rut = 173947755;
 
-        $sentencia = 'SELECT t.rut, t.contrasena, t.tipo, t.nombre FROM usuarios_tab t WHERE t.rut= :rut AND t.contrasena=:contrasena';
+        $sentencia = 'SELECT t.rut, t.contrasena, t.tipo, t.nombre FROM usuarios_tab t WHERE t.rut= :rut AND t.contrasena=:contrasena AND t.borrado_logico = "1" ';
         $consulta = $this->db->prepare($sentencia);
         $consulta->bindParam(":rut", $rut);
         $encriptada = sha1(md5($contrasena));
@@ -60,19 +60,48 @@ class usuarioModelo extends baseModelos {
         $consulta->execute();
         return $consulta;
     }
-    
-    public function actualizarUsuario($datos){
+
+    public function actualizarUsuario($datos) {
         $sentencia = '';
         $sentencia .= 'UPDATE usuarios_tab u ';
         $sentencia .= 'SET u.tipo = :tipo, ';
-        if($datos['contrasena'] != ""){
-        $sentencia .= 'u.contrasena = :contrasena, ';
+        if ($datos['contrasena'] != "") {
+            $sentencia .= 'u.contrasena = :contrasena, ';
         }
         $sentencia .= 'u.nombre = :nombre, ';
         $sentencia .= 'u.apellido_pat = :apellidoPaterno, ';
         $sentencia .= 'u.apellido_mat = :apellidoMaterno, ';
         $sentencia .= 'u.direccion  =  direccion_t(:calleDireccion,:numeroDireccion,:ciudadDireccion,:regionDireccion), ';
         $sentencia .= 'u.telefono = telefono_t(:telefono), ';
+        $sentencia .= 'u.borrado_logico = :estado ';
+        $sentencia .= 'WHERE u.rut = :rut';
+        if ($this->existeUsuario($datos['rut']) == 0) {
+            return 0;
+        } else {
+            try {
+                $consulta = $this->db->prepare($sentencia);
+                $consulta->bindParam(":rut", $datos['rut']);
+                if ($datos['contrasena'] != "") {
+                    $encriptada = sha1(md5($datos['contrasena']));
+                    $consulta->bindParam(":contrasena", $encriptada);
+                }
+                $consulta->bindParam(":tipo", $datos['tipo']);
+                $consulta->bindParam(":nombre", $datos['nombre']);
+                $consulta->bindParam(":apellidoPaterno", $datos['apellidoPaterno']);
+                $consulta->bindParam(":apellidoMaterno", $datos['apellidoMaterno']);
+                $consulta->bindParam(":calleDireccion", $datos['calleDireccion']);
+                $consulta->bindParam(":numeroDireccion", $datos['numeroDireccion']);
+                $consulta->bindParam(":ciudadDireccion", $datos['ciudadDireccion']);
+                $consulta->bindParam(":regionDireccion", $datos['regionDireccion']);
+                $consulta->bindParam(":telefono", $datos['telefono']);
+                $consulta->bindParam(":estado", $datos['estadoUsuario']);
+                $consulta->execute();
+            } catch (PDOException $e) {
+                return '0' . $e->getMessage();
+            }
+
+            return 1;
+        }
     }
 
     public function listarUsuarios() {
@@ -92,6 +121,27 @@ class usuarioModelo extends baseModelos {
 
         $valor = $consulta->fetch();
         return $valor[0];
+    }
+
+    public function activarUsuario($rut) {
+
+        $sentencia = 'UPDATE usuarios_tab u ' .
+                'SET u.borrado_logico = 1 ' .
+                'WHERE u.rut = :rut';
+        if ($this->existeUsuario($rut) == 0) {
+            return 3;
+        } else {
+            try {
+                $consulta = $this->db->prepare($sentencia);
+                $consulta->bindParam(':rut', $rut);
+                $consulta->execute();
+            } catch (PDOException $e) {
+                
+                return '0'.$e->getMessage();
+            }
+
+            return 1;
+        }
     }
 
 }

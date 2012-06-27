@@ -40,7 +40,19 @@ $(document).ready(function () {
             type: 'POST',
             data: 'submit=&rut='+$rut+'&contrasena='+$contrasena+'&tipo='+$tipo+'&nombre='+$nombre+'&apellidoPaterno='+$apellidoPaterno+'&apellidoMaterno='+$apellidoMaterno+'&calleDireccion='+$calleDireccion+'&numeroDireccion='+$numeroDireccion+'&ciudadDireccion='+$ciudadDireccion+'&regionDireccion='+$regionDireccion+'&telefono='+$telefono+'&estadoUsuario='+$estado,
             success: function(datos){
-                alert(datos);
+                switch(datos){
+                    case '0':
+                        alert("Problemas al Actualizar. Intentelo más tarde!");
+                        break;
+                    case '1':
+                        alert("Usuario Actualizado! Redireccionando...");
+                        window.location.href = url+"?controlador=usuario&accion=listar";
+                        break;
+                    case '3':
+                        alert("Problemas con el Usuario!!! Refrescando la pagina...");
+                        window.location.href = url+"?controlador=usuario&accion=listar";
+                        break;
+                }
             //imprimir un mensaje de correcto o no xD
             },
             error: function(){

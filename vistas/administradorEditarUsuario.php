@@ -50,7 +50,7 @@
             <td colspan="2">
                 <select id="estadoUsuario">
                     <option value="1" <?php if ($item['BORRADO_LOGICO'] == 1) { echo 'selected'; } ?>>Activado</option>
-                    <option value="2" <?php if ($item['BORRADO_LOGICO'] == 0) { echo 'selected'; } ?>>Desactivado</option>
+                    <option value="0" <?php if ($item['BORRADO_LOGICO'] == 0) { echo 'selected'; } ?>>Desactivado</option>
                 </select>
             </td>
         </tr>

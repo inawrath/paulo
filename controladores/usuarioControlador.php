@@ -71,7 +71,6 @@ class usuarioControlador extends BaseControladores {
     public function editar($rut) {
         //echo $id;
         if (isset($_POST['submit'])) {
-            //print_r($_POST);
             if ($_POST['rut'] != "" && $_POST['rut'] == $rut) {
                 require_once 'inicioControlador.php';
                 if (inicioControlador::valida_rut($_POST['rut'])) {
@@ -106,8 +105,15 @@ class usuarioControlador extends BaseControladores {
     }
 
     public function activar($rut) {
-        //borrado logico
-        echo $rut;
+        require_once 'inicioControlador.php';
+        if (inicioControlador::valida_rut($rut)) {
+            require_once 'modelos/usuarioModelo.php';
+            $activar = new usuarioModelo();
+            $activado = $activar->activarUsuario($rut);
+            echo $activado;
+        } else {
+            echo 3;
+        }
     }
 
 }
