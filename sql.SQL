@@ -1,0 +1,149 @@
+create type telefono_t as varray(10) of varchar(20);
+
+create type direccion_t as object(
+calle varchar(50),
+numero number,
+ciudad varchar(30),
+region number);
+
+create type usuario as object(
+rut varchar(9),
+contrasena varchar(40),
+tipo number,
+nombre varchar(50),
+apellido_pat varchar(30),
+apellido_mat varchar(30),
+direccion direccion_t,
+telefono telefono_t,
+fecha_suspencion date,
+borrado_logico number);
+
+create type publicacion_t as object(
+nombre varchar(50),
+tipo varchar(20),
+autor varchar (50),
+edicion varchar(4),
+anio varchar(4),
+editorial varchar(20),
+resumen varchar(100));
+
+create type material as object(
+clasificacion varchar(10),
+id_material varchar(13),
+cantidad number,
+descripcion publicacion_t,
+borrado_logico number);
+
+create or replace type devolucion as object(
+id integer,
+fecha_recepcion timestamp,
+id_material ref material,
+rut_usuario ref usuario);
+
+create type prestamo as object(
+id integer,
+fecha_inicio timestamp,
+fecha_devolucion timestamp,
+id_mat ref material,
+rut_u ref usuario);
+
+create table usuarios_tab of usuario(
+rut primary key);
+
+create table materiales_tab of material(
+id_material primary key);
+
+create table devolucion_tab of devolucion(
+primary key(id, fecha_recepcion)
+);
+
+create table prestamo_tab of prestamo(
+fecha_devolucion NULL,
+primary key(id, fecha_inicio)
+);
+
+CREATE SEQUENCE auto_id_devolucion
+INCREMENT BY 1
+START WITH 1;
+
+CREATE SEQUENCE auto_id_prestamo
+INCREMENT BY 1
+START WITH 1;
+
+/*INSERTAR EN LA TABLA usuarios_tab para ivan y jona minda es la contrasena*/
+INSERT INTO usuarios_tab
+VALUES ('175705228','cf5598d8fc96c663d19c242e5a3785706a322bc9',2,'Ivan','Nawrath','Castillo',direccion_t('berlin',4268,'concepcion',8) ,telefono_t('123456789'),'01/01/1990','1');
+
+INSERT INTO usuarios_tab
+VALUES ('173947755','cf5598d8fc96c663d19c242e5a3785706a322bc9',2,'Jonathan','Fierro','Sandoval',direccion_t('Santa Amalia',42,'Lirquen',3) ,telefono_t('879879'),'01/01/1990','1');
+
+INSERT INTO usuaios_tab
+VALUES ('111111111','cf5598d8fc96c663d19c242e5a3785706a322bc9',1,'Usuario','Basico','Prueba',direccion_t('notengocasa',00,'bajoelpuente',8) ,telefono_t('879879'),'01/01/1990','1');
+
+INSERT INTO materiales_tab
+VALUES('1234567890','1234567890123',10,publicacion_t('libro 1','libro','autor 1', '1990', '1990', 'editorial 1', 'resumen 2'),1);
+
+/*SE DEBEN INSERTAR TODOS LOS PARAMETROS*/
+
+/*REALIZAR UNA CONSULTA*/
+SELECT t.rut, t.contrasena, t.nombre, t.apellido_pat, t.apellido_mat, t.direccion.calle, t.direccion.numero, t.direccion.ciudad, t.direccion.region, t.fecha_suspencion, t.borrado_logico FROM usuarios_tab t;
+
+SELECT m.clasificacion, m.id_material, m.cantidad, m.borrado_logico, m.descripcion.nombre, m.descripcion.tipo, m.descripcion.autor, m.descripcion.edicion, m.descripcion.año, m.descripcion.editorial, m.descripcion.ficha_resumen
+FROM materiales_tab m;
+
+/*Si quieres acceder a un atributo que esta compuesto por un objeto, debes llamar al objeto (en este caso direccion), y luego debes ingresar el atributo (en este caso, el atributo de direccion es calle) */
+
+/*REALIZAR UNA ACTUALIZACION*/
+UPDATE usuarios_tab t
+SET t.direccion.calle = 'zepelin'
+WHERE t.rut = '175705228';
+
+
+
+/********************************************************************/
+/********************************************************************/
+/********************************************************************/
+/********************************************************************/
+/*MySql*/
+
+create table usuarios_tab(
+rut varchar(9),
+contrasena varchar(40),
+tipo int,
+nombre varchar(50),
+apellido_pat varchar(30),
+apellido_mat varchar(30),
+fecha_suspencion date,
+borrado_logico int
+);
+
+/*minda es la contrasena para jonathan e ivan*/
+INSERT INTO usuarios_tab
+VALUES ('175705228','cf5598d8fc96c663d19c242e5a3785706a322bc9',2,'Ivan','Nawrath','Castillo','01/01/2011',1);
+
+INSERT INTO usuarios_tab
+VALUES ('173947755','cf5598d8fc96c663d19c242e5a3785706a322bc9',2,'Jonathan','Fierro','Sandoval','01/01/2011',1);
+
+/*para user es 0 el rut y resu la contrasena*/
+INSERT INTO usuarios_tab
+VALUES ('0','3448744cb8797d4709803236a957a582c0b9e0a2',1,'usuario','normal','pollo','01/01/2011',1);
+
+
+create table materiales_tab(
+id varchar(13),
+cantidad int,
+cantidad_prestamos int,
+nombre varchar(50),
+tipo varchar(20),
+autor varchar (50),
+edicion varchar(4),
+anio varchar(4),
+editorial varchar(20),
+resumen varchar(100),
+borrado_logico int);
+
+INSERT INTO materiales_tab
+VALUES ('001',2,1,'php','Libro','internet','1','2012','internet','libro sobre php','11');
+
+INSERT INTO materiales_tab
+VALUES ('002',1,0,'mysql','Libro','internet','1','2012','internet','libro sobre mysql','11');
