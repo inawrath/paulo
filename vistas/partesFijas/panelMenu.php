@@ -15,6 +15,7 @@
                     ?>
                     <button id="administradorUsuarios" class="boton w90">Usuarios</button>
                     <button id="administradorMateriales" class="boton w90">Materiales</button>
+                    <button id="administradorListarPrestamos" class="boton w90">Listar Prestamos</button>
                     <button id="administradorDevolucionMaterial" class="boton w90">Devolucion Material</button>
                     <?php
                     break;

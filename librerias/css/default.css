@@ -166,11 +166,8 @@ th{
 
 
 /* estilo para las tablas */
-table {
- /*border-collapse: collapse; /* IE7 and lower */
+.bordered {
  width: 80%;
- }
- .bordered {
  border: solid #ccc 1px;
  -moz-border-radius: 6px;
  -webkit-border-radius: 6px;
@@ -249,4 +246,20 @@ table {
  -webkit-box-shadow: 0 1px 0 rgba(255,255,255,.8) inset;
  -moz-box-shadow:0 1px 0 rgba(255,255,255,.8) inset;
  box-shadow: 0 1px 0 rgba(255,255,255,.8) inset;
+ }
+
+ 
+ 
+ /*Css para las tablas de entrada**/
+ .tablaEntrada td{
+    vertical-align: top;
+    text-align: left;
+    padding-left: 20px;
+ }
+ .tablaEntrada td input,select,textarea{
+     width: 100%;
+ }
+ .tablaEntrada textarea{
+     height: 70px;
+     resize: none;
  }

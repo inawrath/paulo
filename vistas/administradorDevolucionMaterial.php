@@ -1,5 +1,5 @@
 <h1>Ingrese el ID del material</h1>
-<table align="center">
+<table align="center" class="tablaEntrada">
     <tr>
         <td><input id="idMaterial"/></td>
     </tr>

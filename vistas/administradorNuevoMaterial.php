@@ -1,5 +1,5 @@
 <h1>Ingrese datos Material Nuevo</h1>
-<table align="center">
+<table align="center" class="tablaEntrada">
     <tr>
         <td>ID:</td><td colspan="2"><input id="idMaterial" value=""/></td>
     </tr>

@@ -1,5 +1,5 @@
 <h1>Modifique los datos del Usuario</h1>
-<table align="center">
+<table align="center" class="tablaEntrada">
     <?php
     while ($item = $listado->fetch()) {
         
