@@ -83,6 +83,8 @@ class usuarioControlador extends BaseControladores {
                 }
             }//*/
         } else {
+            $_SESSION['fecha_suspencion'] = '-1';
+            $_SESSION['estado'] = '-1';
             //Incluye el modelo que corresponde
             require 'modelos/usuarioModelo.php';
 
@@ -100,8 +102,15 @@ class usuarioControlador extends BaseControladores {
     }
 
     public function eliminar($rut) {
-        //borrado logico
-        echo $rut;
+        require_once 'inicioControlador.php';
+        if (inicioControlador::valida_rut($rut)) {
+            require_once 'modelos/usuarioModelo.php';
+            $activar = new usuarioModelo();
+            $activado = $activar->activarDesactivarUsuario($rut,0);
+            echo $activado;
+        } else {
+            echo 3;
+        }
     }
 
     public function activar($rut) {
@@ -109,7 +118,7 @@ class usuarioControlador extends BaseControladores {
         if (inicioControlador::valida_rut($rut)) {
             require_once 'modelos/usuarioModelo.php';
             $activar = new usuarioModelo();
-            $activado = $activar->activarUsuario($rut);
+            $activado = $activar->activarDesactivarUsuario($rut,1);
             echo $activado;
         } else {
             echo 3;

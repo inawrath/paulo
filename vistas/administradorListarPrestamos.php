@@ -5,6 +5,17 @@
         <th>Rut</th><th>Nombre Usuario</th><th>Materiales</th>
     </tr>
     <tr>
-        <td>11.111.111.-1</td><td>Nombre Apellido_pa</td><td>material1, material2, ....., materialN</td>
+        <?php
+        for ($i = 0; $i < $listado['cantidad']; $i++) {
+            ?>
+            <td><?= $listado[$i]['rut'] ?></td><td><?= $listado[$i]['nombre'] ?></td><td><?php
+        for ($j = 0; $j < $listado[$i]['cantidad']; $j++) {
+            if ($j != 0)
+                echo ', ';
+            echo $listado[$i][$j];
+        }
+            ?></td>
+        <?php }
+        ?>
     </tr>
 </table>

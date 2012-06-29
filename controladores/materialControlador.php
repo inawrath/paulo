@@ -33,8 +33,13 @@ class materialControlador extends baseControladores {
 
     public function nuevo() {
         if (isset($_POST['submit'])) {
-            //crear insert
-            echo $_POST['nombre'] . $_POST['tipo'] . $_POST['resumen'];
+            require_once 'modelos/materialModelo.php';
+
+            $insertar = new materialModelo();
+            $insertado = $insertar->insertarMaterial($_POST);
+
+            echo $insertado;
+            //print_r($_POST);
         } else {
             $this->vista->desplegar("administradorNuevoMaterial", "administradorNuevoMaterial.php");
         }
@@ -43,6 +48,7 @@ class materialControlador extends baseControladores {
     public function editar($id) {
         if (isset($_POST['submit'])) {
             //aca hacemos el update
+            print_r($_POST);
         } else {
             //Incluye el modelo que corresponde
             require 'modelos/materialModelo.php';
@@ -61,13 +67,25 @@ class materialControlador extends baseControladores {
     }
 
     public function eliminar($id) {
-        //borrado logico y respuesta resultado
-        echo $id;
+        //Incluye el modelo que corresponde
+        require 'modelos/materialModelo.php';
+
+        //Creamos una instancia de nuestro "modelo"
+        $items = new materialModelo();
+        
+        $estado = $items->activarDesactivarMaterial($id, 0);
+        echo $estado;
     }
 
     public function activar($id) {
-        //borrado logico y respuesta resultado
-        echo $id;
+        //Incluye el modelo que corresponde
+        require 'modelos/materialModelo.php';
+
+        //Creamos una instancia de nuestro "modelo"
+        $items = new materialModelo();
+        
+        $estado = $items->activarDesactivarMaterial($id, 1);
+        echo $estado;
     }
 
     public function solicitarPrestamo($id) {
@@ -84,9 +102,19 @@ class materialControlador extends baseControladores {
         }
     }
 
-    public function listarPrestamos(){
-        $this->vista->desplegar("administradorListarPrestamos", "administradorListarPrestamos.php");
+    public function listarPrestamos() {
+        //Incluye el modelo que corresponde
+        require 'modelos/materialModelo.php';
+
+        //Creamos una instancia de nuestro "modelo"
+        $items = new materialModelo();
+        
+        $listado = $items->listadoUsuarioPrestamo();
+        
+        $data['listado'] = $listado;
+        $this->vista->desplegar("administradorListarPrestamos", "administradorListarPrestamos.php",$data);
     }
+
 }
 
 ?>

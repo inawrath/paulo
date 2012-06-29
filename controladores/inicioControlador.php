@@ -79,6 +79,40 @@ class inicioControlador extends baseControladores {
         }
     }
 
+    /* Retorno:
+     * 0: si son iguales
+     * 1: si fecha es mayor a fechaActual
+     * 2: si fecha es menor a fechaActual
+     */
+
+    public static function compararFechas($fecha, $fechaActual) {
+        if ($fecha['year'] == $fechaActual['year'] && $fecha['mon'] == $fechaActual['mon'] && $fecha['mday'] == $fechaActual['mday']) {
+            return 0;
+        } else {
+            if ($fecha['year'] > $fechaActual['year']) {
+                return 1;
+            } else {
+                if ($fecha['year'] == $fechaActual['year']) {
+                    if ($fecha['mon'] > $fechaActual['mon']) {
+                        return 1;
+                    } else {
+                        if ($fecha['mon'] == $fechaActual['mon']) {
+                            if ($fecha['mday'] > $fechaActual['mday']) {
+                                return 1;
+                            } else {
+                                return 2;
+                            }
+                        } else {
+                            return 2;
+                        }
+                    }
+                } else {
+                    return 2;
+                }
+            }
+        }
+    }
+
 }
 
 ?>

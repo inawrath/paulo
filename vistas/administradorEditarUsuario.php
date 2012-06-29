@@ -1,8 +1,16 @@
 <h1>Modifique los datos del Usuario</h1>
 <table align="center" class="tablaEntrada">
     <?php
+    require_once 'controladores/inicioControlador.php';
+
     while ($item = $listado->fetch()) {
-        
+        $fecha['year'] = $item[14];
+        $fecha['mon'] = $item[13];
+        $fecha['mday'] = $item[12];
+        $fechaActual = getdate();
+        $estado = inicioControlador::compararFechas($fecha, $fechaActual);
+        $_SESSION['fecha_suspencion'] = $fecha['mday'].'/'.$fecha['mon'].'/'.$fecha['year'];
+        $_SESSION['estado'] = $estado;
         ?><tr>
             <td>Rut:</td><td colspan="2"><input id="rutUsuario" value="<?php echo $item['RUT'] ?>" readonly/></td>
         </tr>
@@ -49,15 +57,15 @@
             <td>Estado: </td>
             <td colspan="2">
                 <select id="estadoUsuario">
-                    <option value="1" <?php if ($item['BORRADO_LOGICO'] == 1) { echo 'selected'; } ?>>Activado</option>
-                    <option value="0" <?php if ($item['BORRADO_LOGICO'] == 0) { echo 'selected'; } ?>>Desactivado</option>
+                    <option value="1" <?php if ($estado == 2) { echo 'selected'; } ?>>Activado</option>
+                    <option value="0" <?php if ($estado == 0 || $estado == 1) { echo 'selected'; } ?>>Desactivado</option>
                 </select>
             </td>
         </tr>
         <tr>
             <td></td><td><button id="actualizarUsuario" class="boton">Guardar Nuevo Usuario</button></td><td><button id="cancelarActualizarUsuario" class="boton">Cancelar</button></td>
         </tr>
-    <?php
-}
-?> 
+        <?php
+    }
+    ?> 
 </table>

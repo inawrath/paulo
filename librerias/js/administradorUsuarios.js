@@ -20,8 +20,19 @@ $(document).ready(function () {
                 type: "GET",
                 data: "id="+$id,
                 success: function(datos){
-                    alert(datos);
-                //$("#fila-"+cliente_id).remove();
+                    switch(datos){
+                        case '0':
+                            alert("Problemas al Eliminar. Intentelo más tarde!");
+                            break;
+                        case '1':
+                            alert("Usuario Desactivado! Redireccionando...");
+                            window.location.href = url+"?controlador=usuario&accion=listar";
+                            break;
+                        case '3':
+                            alert("Problemas con el Usuario!!! Refrescando la pagina...");
+                            window.location.href = url+"?controlador=usuario&accion=listar";
+                            break;
+                    }
                 }
             });
         }
@@ -49,7 +60,6 @@ $(document).ready(function () {
                             window.location.href = url+"?controlador=usuario&accion=listar";
                             break;
                     }
-                //$("#fila-"+cliente_id).remove();
                 }
             });
         }

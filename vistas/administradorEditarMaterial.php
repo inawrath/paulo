@@ -4,37 +4,43 @@
     while ($item = $listado->fetch()) {
         ?>
         <tr>
-            <td>ID:</td><td><input id="idMaterial" value="<?php echo $item['id'] ?>"/></td>
+            <td>Clasificación:</td><td colspan="2"><input id="clasificacionMaterial" value="<?php echo $item['CLASIFICACION'] ?>" readonly/></td>
         </tr>
         <tr>
-            <td>Nombre:</td><td><input id="nombreMaterial" value=" <?php echo $item['nombre'] ?>"/></td>
+            <td>Nombre:</td><td><input id="nombreMaterial" value="<?php echo $item['DESCRIPCION.NOMBRE'] ?>"/></td>
         </tr>
         <tr>
             <td>Tipo:</td>
             <td>
                 <select id="tipoMaterial">
-                    <option value="Libro" <?php if ($item['tipo'] == 'Libro') { echo 'selected'; } ?>>Libro</option>
-                    <option value="Revista" <?php if ($item['tipo'] == 'Revista') { echo 'selected'; } ?>>Revista</option>
-                    <option value="DVD" <?php if ($item['tipo'] == 'DVD') { echo 'selected'; } ?>>DVD</option>
+                    <option value="Libro" <?php if ($item['DESCRIPCION.TIPO '] == 'Libro') { echo 'selected'; } ?>>Libro</option>
+                    <option value="Revista" <?php if ($item['DESCRIPCION.TIPO'] == 'Revista') { echo 'selected'; } ?>>Revista</option>
+                    <option value="DVD" <?php if ($item['DESCRIPCION.TIPO'] == 'DVD') { echo 'selected'; } ?>>DVD</option>
                 </select>
             </td>
         </tr>
         <tr>
-            <td>Autor:</td><td><input id="autorMaterial" value="<?php echo $item['autor'] ?>"/></td>
+            <td>Autor:</td><td><input id="autorMaterial" value="<?php echo $item['DESCRIPCION.AUTOR'] ?>"/></td>
         </tr>
         <tr>
-            <td>Edicion:</td><td><input id="edicionMaterial" value="<?php echo $item['edicion'] ?>"/></td>
+            <td>Edicion:</td><td><input id="edicionMaterial" value="<?php echo $item['DESCRIPCION.EDICION'] ?>"/></td>
         </tr>
         <tr>
-            <td>Editorial:</td><td><input id="editorialMaterial" value="<?php echo $item['editorial'] ?>"/></td>
+            <td>A&ntilde;o Edicion:</td><td colspan="2"><input id="anioMaterial" value="<?php echo $item['DESCRIPCION.ANIO'] ?>"/></td>
         </tr>
         <tr>
-            <td>Resumen:</td><td><textarea id="resumenMaterial"><?php echo $item['resumen'] ?></textarea></td>
+            <td>Editorial:</td><td><input id="editorialMaterial" value="<?php echo $item['DESCRIPCION.EDITORIAL'] ?>"/></td>
         </tr>
         <tr>
-            <td></td><td><button id="guardarNuevoMaterial" class="boton">Guardar Nuevo Material</button></td><td><button id="cancelarActualizarMaterial" class="boton">cancelar</button></td>
+            <td>Nro Copias:</td><td colspan="2"><input id="copiasMaterial" value="<?php echo $item['CANTIDAD'] ?>"/></td>
         </tr>
-    <?php
+        <tr>
+            <td>Resumen:</td><td><textarea id="resumenMaterial"><?php echo $item['DESCRIPCION.RESUMEN'] ?></textarea></td>
+        </tr>
+        <tr>
+            <td></td><td><button id="guardarActualizarMaterial" class="boton">Guardar Nuevo Material</button></td><td><button id="cancelarActualizarMaterial" class="boton">cancelar</button></td>
+        </tr>
+        <?php
     }
     ?> 
 </table>

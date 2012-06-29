@@ -11,15 +11,15 @@
     while ($item = $listado->fetch()) {
         ?>
         <tr>
-            <td><?= $item[0] ?></td><td><?= $item[1] ?></td><td><?= $item[2] ?></td>
+            <td><?= $item['DESCRIPCION.NOMBRE'] ?></td><td><?= $item['DESCRIPCION.TIPO'] ?></td><td><?= $item['DESCRIPCION.RESUMEN'] ?></td>
             <?php
-            if ($item[3] == 0) {
+            if ($item['BORRADO_LOGICO'] == 0) {
                 ?>
-                <td colspan="2"><a href="<?php echo $item[4] ?>" class="activar boton">Activar</a></td>
+                <td colspan="2"><a href="<?php echo $item['CLASIFICACION'] ?>" class="activar boton">Activar</a></td>
                 <?php
             } else {
                 ?>
-                <td><a href="<?php echo $item[4] ?>" class="editar boton">editar</a></td><td><a href="<?php echo $item[4] ?>" class="eliminar boton">eliminar</a></td>
+                <td><a href="<?php echo $item['CLASIFICACION'] ?>" class="editar boton">editar</a></td><td><a href="<?php echo $item['CLASIFICACION'] ?>" class="eliminar boton">eliminar</a></td>
                 <?php
             }
             ?>

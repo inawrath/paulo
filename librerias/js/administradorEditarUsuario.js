@@ -52,6 +52,9 @@ $(document).ready(function () {
                         alert("Problemas con el Usuario!!! Refrescando la pagina...");
                         window.location.href = url+"?controlador=usuario&accion=listar";
                         break;
+                    default:
+                        alert(datos);
+                        break;
                 }
             //imprimir un mensaje de correcto o no xD
             },

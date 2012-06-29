@@ -6,7 +6,7 @@ class usuarioModelo extends baseModelos {
 //realizamos la consulta de todos los items
 //SELECT t.rut, t.contrasena FROM usuarios_tab t where t.rut = 173947755;
 
-        $sentencia = 'SELECT t.rut, t.contrasena, t.tipo, t.nombre FROM usuarios_tab t WHERE t.rut= :rut AND t.contrasena=:contrasena AND t.borrado_logico = "1" ';
+        $sentencia = 'SELECT t.rut, t.contrasena, t.tipo, t.nombre FROM usuarios_tab t WHERE t.rut= :rut AND t.contrasena=:contrasena AND t.borrado_logico = 1 ';
         $consulta = $this->db->prepare($sentencia);
         $consulta->bindParam(":rut", $rut);
         $encriptada = sha1(md5($contrasena));
@@ -53,7 +53,8 @@ class usuarioModelo extends baseModelos {
         $sentencia = 'SELECT t.rut, t.contrasena, t.nombre, t.tipo,' .
                 ' t.apellido_pat, t.apellido_mat, t.direccion.calle,' .
                 ' t.direccion.numero, t.direccion.ciudad, t.direccion.region,' .
-                ' t.fecha_suspencion, tel.*, t.borrado_logico ' .
+                ' t.fecha_suspencion, tel.*,' .
+                ' TO_CHAR(t.fecha_suspencion,\'DD\'), TO_CHAR(t.fecha_suspencion,\'MM\'), TO_CHAR(t.fecha_suspencion,\'YYYY\') ' .
                 'FROM usuarios_tab t, TABLE(t.telefono) tel WHERE t.rut = :rut';
         $consulta = $this->db->prepare($sentencia);
         $consulta->bindParam(":rut", $rut);
@@ -72,8 +73,8 @@ class usuarioModelo extends baseModelos {
         $sentencia .= 'u.apellido_pat = :apellidoPaterno, ';
         $sentencia .= 'u.apellido_mat = :apellidoMaterno, ';
         $sentencia .= 'u.direccion  =  direccion_t(:calleDireccion,:numeroDireccion,:ciudadDireccion,:regionDireccion), ';
-        $sentencia .= 'u.telefono = telefono_t(:telefono), ';
-        $sentencia .= 'u.borrado_logico = :estado ';
+        $sentencia .= 'u.telefono = telefono_t(:telefono)';
+        $sentencia .= ', u.fecha_suspencion = :suspencion ';
         $sentencia .= 'WHERE u.rut = :rut';
         if ($this->existeUsuario($datos['rut']) == 0) {
             return 0;
@@ -94,10 +95,20 @@ class usuarioModelo extends baseModelos {
                 $consulta->bindParam(":ciudadDireccion", $datos['ciudadDireccion']);
                 $consulta->bindParam(":regionDireccion", $datos['regionDireccion']);
                 $consulta->bindParam(":telefono", $datos['telefono']);
-                $consulta->bindParam(":estado", $datos['estadoUsuario']);
+                if ($datos['estadoUsuario'] == '1') {
+                    $suspencion = '01/01/1990';
+                } elseif ($datos['estadoUsuario'] == '0') {
+                    if ($_SESSION['estado'] == 2) {
+                        $fechaHoy = getdate();
+                        $suspencion = '01/01/' . ($fechaHoy['year'] + 10);
+                    }
+                } else {
+                    $suspencion = $_SESSION['fecha_suspencion'];
+                }
+                $consulta->bindParam(":suspencion", $suspencion);
                 $consulta->execute();
             } catch (PDOException $e) {
-                return '0' . $e->getMessage();
+                return 0;
             }
 
             return 1;
@@ -123,10 +134,10 @@ class usuarioModelo extends baseModelos {
         return $valor[0];
     }
 
-    public function activarUsuario($rut) {
+    public function activarDesactivarUsuario($rut, $estado) {
 
         $sentencia = 'UPDATE usuarios_tab u ' .
-                'SET u.borrado_logico = 1 ' .
+                'SET u.borrado_logico = :estado ' .
                 'WHERE u.rut = :rut';
         if ($this->existeUsuario($rut) == 0) {
             return 3;
@@ -134,10 +145,10 @@ class usuarioModelo extends baseModelos {
             try {
                 $consulta = $this->db->prepare($sentencia);
                 $consulta->bindParam(':rut', $rut);
+                $consulta->bindParam(':estado', $estado);
                 $consulta->execute();
             } catch (PDOException $e) {
-                
-                return '0'.$e->getMessage();
+                return 0;
             }
 
             return 1;
