@@ -30,10 +30,11 @@ resumen varchar(100));
 create type material as object(
 clasificacion varchar(10),
 id_material integer,
+prestado integer,
 descripcion publicacion_t,
 borrado_logico number);
 
-create or replace type devolucion as object(
+create type devolucion as object(
 id integer,
 fecha_recepcion timestamp,
 id_material ref material,
@@ -100,6 +101,23 @@ FROM materiales_tab m;
 UPDATE usuarios_tab t
 SET t.direccion.calle = 'zepelin'
 WHERE t.rut = '175705228';
+
+/*BORRAR LA BD DE ORACLE */
+drop table prestamo_tab;
+drop table devolucion_tab;
+drop table materiales_tab;
+drop table usuarios_tab;
+drop type prestamo;
+drop type devolucion;
+drop type material;
+drop type publicacion_t;
+drop type usuario;
+drop type direccion_t;
+drop type telefono_t;
+drop sequence auto_id_devolucion;
+drop sequence auto_id_prestamo;
+drop sequence auto_id_material;
+/*BORRAR LA BD DE ORACLE */
 
 
 

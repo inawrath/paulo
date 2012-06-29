@@ -13,17 +13,21 @@ class materialControlador extends baseControladores {
         //Creamos una instancia de nuestro "modelo"
         $items = new materialModelo();
 
-        //Le pedimos al modelo todos los items usuarios
-        $listado = $items->listarMateriales();
-
-        //Pasamos a la vista toda la informacion que se desea representar
-        $data['listado'] = $listado;
-
         switch ($_SESSION['tipo']) {
             case 1:
+                //Le pedimos al modelo todos los items usuarios
+                $listado = $items->listarMateriales(1);
+
+                //Pasamos a la vista toda la informacion que se desea representar
+                $data['listado'] = $listado;
                 $this->vista->desplegar("usuarioBuscaMaterial", "usuarioBuscaMaterial.php", $data);
                 break;
             case 2:
+                //Le pedimos al modelo todos los items usuarios
+                $listado = $items->listarMateriales(2);
+
+                //Pasamos a la vista toda la informacion que se desea representar
+                $data['listado'] = $listado;
                 $this->vista->desplegar("administradorMateriales", "administradorMateriales.php", $data);
                 break;
             default:
@@ -72,7 +76,7 @@ class materialControlador extends baseControladores {
 
         //Creamos una instancia de nuestro "modelo"
         $items = new materialModelo();
-        
+
         $estado = $items->activarDesactivarMaterial($id, 0);
         echo $estado;
     }
@@ -83,20 +87,25 @@ class materialControlador extends baseControladores {
 
         //Creamos una instancia de nuestro "modelo"
         $items = new materialModelo();
-        
+
         $estado = $items->activarDesactivarMaterial($id, 1);
         echo $estado;
     }
 
     public function solicitarPrestamo($id) {
-        /* realizar las acciones pertinentes al prestamo */
-        echo 1;
+        //Incluye el modelo que corresponde
+        require 'modelos/materialModelo.php';
+
+        //Creamos una instancia de nuestro "modelo"
+        $items = new materialModelo();
+
+        echo $items->prestamoMaterial($id, $_SESSION['userid']);
     }
 
     public function devolucion() {
         if (isset($_POST['submit'])) {
             /* realizar las acciones pertinentes a la devolucion */
-            echo $_POST['id'];
+            echo $_POST['id'].print_r(getdate());
         } else {
             $this->vista->desplegar("administradorDevolucionMaterial", "administradorDevolucionMaterial.php");
         }
@@ -108,11 +117,11 @@ class materialControlador extends baseControladores {
 
         //Creamos una instancia de nuestro "modelo"
         $items = new materialModelo();
-        
+
         $listado = $items->listadoUsuarioPrestamo();
-        
+
         $data['listado'] = $listado;
-        $this->vista->desplegar("administradorListarPrestamos", "administradorListarPrestamos.php",$data);
+        $this->vista->desplegar("administradorListarPrestamos", "administradorListarPrestamos.php", $data);
     }
 
 }

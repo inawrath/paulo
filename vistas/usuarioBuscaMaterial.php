@@ -8,11 +8,11 @@
     while ($item = $listado->fetch()) {
         ?>
         <tr>
-            <td><?= $item[0] ?></td><td><?= $item[1] ?></td><td><?= $item[2] ?></td><td><?= $item[5] ?></td>
+            <td><?= $item['DESCRIPCION.NOMBRE'] ?></td><td><?= $item['DESCRIPCION.TIPO'] ?></td><td><?= $item['DESCRIPCION.RESUMEN'] ?></td><td><?= $item['CANTIDAD'] ?></td>
             <?php
-            if ($item[5] != 0) {
+            if ($item['CANTIDAD'] != 0) {
                 ?>
-                <td><a href="<?php echo $item[3] ?>" class="solicitarPrestamo boton">Solicitar Prestamo</a></td>
+                <td><a href="<?php echo $item['CLASIFICACION'] ?>" class="solicitarPrestamo boton">Solicitar Prestamo</a></td>
                 <?php
             }
             ?>
