@@ -104,8 +104,14 @@ class materialControlador extends baseControladores {
 
     public function devolucion() {
         if (isset($_POST['submit'])) {
-            /* realizar las acciones pertinentes a la devolucion */
-            echo $_POST['id'].print_r(getdate());
+            //Incluye el modelo que corresponde
+            require 'modelos/materialModelo.php';
+
+            //Creamos una instancia de nuestro "modelo"
+            $items = new materialModelo();
+
+
+            echo $items->devolucionPrestamo($_POST['id']);
         } else {
             $this->vista->desplegar("administradorDevolucionMaterial", "administradorDevolucionMaterial.php");
         }

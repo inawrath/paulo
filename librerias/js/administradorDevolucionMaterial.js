@@ -12,8 +12,16 @@ $(document).ready(function () {
             data: 'submit=&id='+$id,
             success: function(respuesta){
                 alert(respuesta);
-                if(respuesta){
-                    alert('se registro la devolución correctamente');
+                switch(respuesta){
+                    case '0':
+                        alert('Problemas al devolver! Intentelo mas tarde...');
+                        break;
+                    case '1':
+                        alert('Material Devuelto Exitosamente');
+                        break;
+                    case '2':
+                        alert('El material no a sido prestado');
+                        break;
                 }
             },
             error: function(){

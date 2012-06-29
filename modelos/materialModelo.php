@@ -48,11 +48,11 @@ class materialModelo extends baseModelos {
         }
         return 1;
     }
-    
-    public function editarMaterial($datos){
-        $sentencia = 'UPDATE materiales_tab m '.
-        'SET m.descripcion = publicacion_t(:nombre,:tipoLibro,:autor, :edicion, :anio, :editorial, :resumen) '.
-        'WHERE m.clasificacion = :clasificacion';
+
+    public function editarMaterial($datos) {
+        $sentencia = 'UPDATE materiales_tab m ' .
+                'SET m.descripcion = publicacion_t(:nombre,:tipoLibro,:autor, :edicion, :anio, :editorial, :resumen) ' .
+                'WHERE m.clasificacion = :clasificacion';
     }
 
     public function activarDesactivarMaterial($clasificacion, $estado) {
@@ -71,7 +71,7 @@ class materialModelo extends baseModelos {
     }
 
     public function listadoUsuarioPrestamo() {
-        $sentencia = 'SELECT p.rut_u.rut, p.rut_u.nombre, p.rut_u.apellido_pat, p.rut_u.apellido_mat FROM prestamo_tab p GROUP BY p.rut_u.rut, p.rut_u.nombre, p.rut_u.apellido_pat, p.rut_u.apellido_mat';
+        $sentencia = 'SELECT p.rut_u.rut, p.rut_u.nombre, p.rut_u.apellido_pat, p.rut_u.apellido_mat, p.devolucion FROM prestamo_tab p WHERE p.devolucion = 0 GROUP BY p.rut_u.rut, p.rut_u.nombre, p.rut_u.apellido_pat, p.rut_u.apellido_mat, p.devolucion';
         $consulta = $this->db->prepare($sentencia);
         $consulta->execute();
 
@@ -80,14 +80,16 @@ class materialModelo extends baseModelos {
         while ($item = $consulta->fetch()) {
             $listadoUsuarioPrestamo[$i]['rut'] = $item[0];
             $listadoUsuarioPrestamo[$i]['nombre'] = $item[1] . ' ' . $item[2] . ' ' . $item[3];
-            $subsentencia = 'SELECT p.id_mat.descripcion.nombre FROM prestamo_tab p WHERE p.rut_u.rut = :rut';
+            $subsentencia = 'SELECT p.id_mat.descripcion.nombre, p.id_mat.id_material FROM prestamo_tab p WHERE p.rut_u.rut = :rut AND p.devolucion = 0';
             $subconsulta = $this->db->prepare($subsentencia);
             $subconsulta->bindParam(":rut", $item[0]);
             $subconsulta->execute();
             $j = 0;
             while ($subitem = $subconsulta->fetch()) {
 
-                $listadoUsuarioPrestamo[$i][$j] = $subitem['ID_MAT.DESCRIPCION.NOMBRE'];
+                $listadoUsuarioPrestamo[$i][$j][0] = $subitem['ID_MAT.DESCRIPCION.NOMBRE'];
+                $listadoUsuarioPrestamo[$i][$j][1] = $subitem['ID_MAT.ID_MATERIAL'];
+
                 $j++;
             }
             $listadoUsuarioPrestamo[$i]['cantidad'] = $j;
@@ -118,6 +120,34 @@ class materialModelo extends baseModelos {
         if ($i == 0) {
             return 0;
         } else {
+            $fecha = getdate();
+            $subsentencia2 = 'INSERT INTO prestamo_tab ' .
+                    'VALUES(auto_id_prestamo.NextVal,:fecha,:devolucion,0,(SELECT REF(m) FROM materiales_tab m WHERE m.id_material = :id_material), (SELECT REF(u) FROM usuarios_tab u WHERE u.rut = :rut))';
+
+            $inicial = $fecha['mday'] . '-' . $this->mes($fecha['mon']) . '-' . $fecha['year'] . ' ' . $fecha['hours'] . ':' . $fecha['minutes'] . ':' . $fecha['seconds'];
+            if (($fecha['mday'] + 7) > 28 && $fecha['mon'] == 2) {
+                $fecha['mday'] = ($fecha['mday'] + 7) - 28;
+                $fecha['mon'] = 3;
+            } elseif (($fecha['mday'] + 7) > 30) {
+                $fecha['mday'] = ($fecha['mday'] + 7) - 30;
+                $fecha['mon']++;
+            } elseif (($fecha['mday'] + 7) > 30 && $fecha['mon'] == 12) {
+                $fecha['mday'] = ($fecha['mday'] + 7) - 30;
+                $fecha['mon'] = 1;
+                $fecha['year']++;
+            }
+            $devolucion = $fecha['mday'] . '-' . $this->mes($fecha['mon']) . '-' . $fecha['year'] . ' ' . $fecha['hours'] . ':' . $fecha['minutes'] . ':' . $fecha['seconds'];
+            try {
+                $subconsulta2 = $this->db->prepare($subsentencia2);
+                $subconsulta2->bindParam(":id_material", $objeto['id_material']);
+                $subconsulta2->bindParam(":rut", $rut);
+                $subconsulta2->bindParam(":fecha", $inicial);
+                $subconsulta2->bindParam(":devolucion", $devolucion);
+                $subconsulta2->execute();
+            } catch (PDOException $e) {
+                return 0;
+            }
+
             $subsentencia1 = 'UPDATE materiales_tab m ' .
                     'SET m.prestado = 1 ' .
                     'WHERE m.id_material = :id_material';
@@ -128,39 +158,103 @@ class materialModelo extends baseModelos {
             } catch (PDOException $e) {
                 return 0;
             }
-            $fecha = getdate();
-            $subsentencia2 = 'INSERT INTO prestamo_tab ' .
-                    'VALUES(auto_id_prestamo.NextVal,:fecha,:devolucion,(SELECT REF(m) FROM materiales_tab m WHERE m.id_material = :id_material), (SELECT REF(u) FROM usuarios_tab u WHERE u.rut = :rut))';
-
-            $inicial = $fecha['mday'] . '-' . $this->mes($fecha['mon']) . '-' . $fecha['year'] . ' ' . $fecha['hours'] . ':' . $fecha['minutes'] . ':' . $fecha['seconds'];
-            if (($fecha['mday'] + 7) > 28 && $fecha['mon'] == 2) {
-                $fecha['mday'] = ($fecha['mday'] + 7) - 28;
-                $fecha['mon'] = 3;
-            } elseif (($fecha['mday'] + 7) > 30) {
-                $fecha['mday'] = ($fecha['mday'] + 7) - 30;
-                $fecha['mon']++;
-            } elseif (($fecha['mday'] + 7) > 30 && $fecha['mon'] == 12){
-                $fecha['mday'] = ($fecha['mday'] + 7) - 30;
-                $fecha['mon'] = 1;
-                $fecha['year']++;
-            }
-            $devolucion = $fecha['mday'] . '-' . $this->mes($fecha['mon']) . '-' . $fecha['year'];
-            try {
-                $subconsulta2 = $this->db->prepare($subsentencia2);
-                $subconsulta2->bindParam(":id_material", $objeto['id_material']);
-                $subconsulta2->bindParam(":rut", $rut);
-                $subconsulta2->bindParam(":fecha",$inicial);
-                $subconsulta2->bindParam(":devolucion",$devolucion);
-                $subconsulta2->execute();
-            } catch (PDOException $e) {
-                return 0;
-            }
             return 1;
         }
     }
 
+    public function devolucionPrestamo($idMaterial) {
+        $sentencia1 = 'SELECT p.rut_u.rut, TO_CHAR(p.fecha_devolucion,\'DD\') AS dia_devolucion,' .
+                ' TO_CHAR(p.fecha_devolucion,\'MM\') AS mes_devolucion, TO_CHAR(p.fecha_devolucion,\'YYYY\') AS anio_devolucion, p.id ' .
+                'FROM prestamo_tab p WHERE p.id_mat.id_material = :id_material AND p.devolucion = 0';
+        $consulta1 = $this->db->prepare($sentencia1);
+        $consulta1->bindParam(":id_material", $idMaterial);
+        $consulta1->execute();
+        $i = 0;
+        while ($item = $consulta1->fetch()) {
+            $objeto['rut'] = $item[0];
+            $objeto['mday'] = $item[1];
+            $objeto['mon'] = $item[2];
+            $objeto['year'] = $item[3];
+            $objeto['id'] = $item[4];
+            $i++;
+        }
+
+        if ($i == 0) {
+            return 2;
+        } else {
+            require_once 'controladores/inicioControlador.php';
+            $fechaActual = getdate();
+            $estado = inicioControlador::compararFechas($objeto, $fechaActual);
+            /* valores de $estado
+             * 1: devuelve antes de la fecha
+             * 0: devuelve en la misma fecha
+             * 2: devuelve atrasado
+             */
+
+            $sentencia2 = 'UPDATE prestamo_tab p ' .
+                    'SET p.devolucion = 1 ' .
+                    'WHERE p.id_mat.id_material = :id_material AND p.devolucion = 0';
+            try {
+                $consulta2 = $this->db->prepare($sentencia2);
+                $consulta2->bindParam(":id_material", $idMaterial);
+                $consulta2->execute();
+            } catch (PDOException $e) {
+                return 0;
+            }
+
+            $sentencia3 = 'UPDATE materiales_tab m ' .
+                    'SET m.prestado = 0 ' .
+                    'WHERE m.id_material = :id_material';
+            try {
+                $consulta3 = $this->db->prepare($sentencia3);
+                $consulta3->bindParam(":id_material", $idMaterial);
+                $consulta3->execute();
+            } catch (PDOException $e) {
+                return 0;
+            }
+
+            $devolucion = $fechaActual['mday'] . '-' . $this->mes($fechaActual['mon']) . '-' . $fechaActual['year'] . ' ' . $fechaActual['hours'] . ':' . $fechaActual['minutes'] . ':' . $fechaActual['seconds'];
+
+            $sentencia4 = 'INSERT INTO devolucion_tab ' .
+                    'VALUES(auto_id_devolucion.NextVal,:devolucion,' .
+                    '(SELECT p.id_mat FROM prestamo_tab p WHERE p.id = :idPrestamo),' .
+                    '(SELECT p.rut_u FROM prestamo_tab p WHERE p.id = :idPrestamo))';
+            try {
+                $consulta4 = $this->db->prepare($sentencia4);
+                $consulta4->bindParam(":devolucion", $devolucion);
+                $consulta4->bindParam(":idPrestamo", $objeto['id']);
+                $consulta4->execute();
+            } catch (PDOException $e) {
+                return 0;
+            }
+            if ($estado == 2) {
+                $fecha = $fechaActual;
+                if (($fecha['mday'] + 14) > 28 && $fecha['mon'] == 2) {
+                    $fecha['mday'] = ($fecha['mday'] + 14) - 28;
+                    $fecha['mon'] = 3;
+                } elseif (($fecha['mday'] + 14) > 30) {
+                    $fecha['mday'] = ($fecha['mday'] + 14) - 30;
+                    $fecha['mon']++;
+                } elseif (($fecha['mday'] + 14) > 30 && $fecha['mon'] == 12) {
+                    $fecha['mday'] = ($fecha['mday'] + 14) - 30;
+                    $fecha['mon'] = 1;
+                    $fecha['year']++;
+                }
+                $castigo = $fecha['mday'] . '-' . $this->mes($fecha['mon']) . '-' . $fecha['year'] . ' ' . $fecha['hours'] . ':' . $fecha['minutes'] . ':' . $fecha['seconds'];
+                $sentencia5 = 'UPDATE usuarios_tab u ' .
+                        'SET u.fecha_suspencion = :suspencion ' .
+                        'WHERE u.rut = :rut';
+                $consulta5 = $this->db->prepare($sentencia5);
+                $consulta5->bindParam(":suspencion", $castigo);
+                $consulta5->bindParam(":rut", $objeto['rut']);
+                $consulta5->execute();
+            }
+        }
+        return 1;
+    }
+
     private function verificarUsuarioPrestamo($clasificacion, $rut) {
-        $sentencia = 'SELECT COUNT(id) FROM prestamo_tab p WHERE p.rut_u.rut = :rut AND p.id_mat.clasificacion = :clasificacion';
+        $sentencia = 'SELECT COUNT(id) FROM prestamo_tab p WHERE p.rut_u.rut = :rut AND p.id_mat.clasificacion = :clasificacion AND p.devolucion = 0';
 
         $consulta = $this->db->prepare($sentencia);
         $consulta->bindParam(":rut", $rut);

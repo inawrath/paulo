@@ -6,6 +6,6 @@ abstract class baseModelos
 	public function __construct()
 	{
 		$this->db = spdo::singleton();
-	}
+	}       
 }
 ?>

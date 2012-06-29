@@ -96,11 +96,11 @@ class usuarioModelo extends baseModelos {
                 $consulta->bindParam(":regionDireccion", $datos['regionDireccion']);
                 $consulta->bindParam(":telefono", $datos['telefono']);
                 if ($datos['estadoUsuario'] == '1') {
-                    $suspencion = '01/01/1990';
+                    $suspencion = '01/01/1990 00:00:00';
                 } elseif ($datos['estadoUsuario'] == '0') {
                     if ($_SESSION['estado'] == 2) {
                         $fechaHoy = getdate();
-                        $suspencion = '01/01/' . ($fechaHoy['year'] + 10);
+                        $suspencion = '01/01/' . ($fechaHoy['year'] + 10).' 00:00:00';
                     }
                 } else {
                     $suspencion = $_SESSION['fecha_suspencion'];

@@ -44,6 +44,7 @@ create type prestamo as object(
 id integer,
 fecha_inicio timestamp,
 fecha_devolucion timestamp,
+devolucion integer,
 id_mat ref material,
 rut_u ref usuario);
 
@@ -58,7 +59,6 @@ primary key(id, fecha_recepcion)
 );
 
 create table prestamo_tab of prestamo(
-fecha_devolucion NULL,
 primary key(id, fecha_inicio)
 );
 
