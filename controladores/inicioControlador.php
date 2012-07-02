@@ -79,10 +79,9 @@ class inicioControlador extends baseControladores {
         }
     }
 
-    /* Retorno:
-     * 0: si son iguales
-     * 1: si fecha es mayor a fechaActual
-     * 2: si fecha es menor a fechaActual
+    /**
+     * 
+     * @return int Este Metodo retorna 0 si <b>fecha</b> es igual a <b>fechaActual</b>; 1 si <b>fecha</b> es mayor a <b>fechaActual</b>; 2 si <b>fecha</b> es menor a <b>fechaActual</b>
      */
 
     public static function compararFechas($fecha, $fechaActual) {

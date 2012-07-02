@@ -22,7 +22,7 @@ class usuarioModelo extends baseModelos {
                 'direccion_t(:calleDireccion,:numeroDireccion,:ciudadDireccion,:regionDireccion),telefono_t(:telefono),:suspencion,1)';
 
         if ($this->existeUsuario($datos['rut']) == 1) {
-            return 0;
+            return 2;
         } else {
             try {
                 $consulta = $this->db->prepare($sentencia);
@@ -100,7 +100,7 @@ class usuarioModelo extends baseModelos {
                 } elseif ($datos['estadoUsuario'] == '0') {
                     if ($_SESSION['estado'] == 2) {
                         $fechaHoy = getdate();
-                        $suspencion = '01/01/' . ($fechaHoy['year'] + 10).' 00:00:00';
+                        $suspencion = '01/01/' . ($fechaHoy['year'] + 10) . ' 00:00:00';
                     }
                 } else {
                     $suspencion = $_SESSION['fecha_suspencion'];
@@ -117,7 +117,7 @@ class usuarioModelo extends baseModelos {
 
     public function listarUsuarios() {
 //realizamos la consulta de todos los items
-        $sentencia = 'SELECT u.rut, u.nombre, u.tipo, u.borrado_logico FROM usuarios_tab u';
+        $sentencia = 'SELECT u.rut, u.nombre ||\' \'|| u.apellido_pat ||\' \'|| u.apellido_mat AS NOMBRE, u.tipo, u.borrado_logico, TO_CHAR(u.fecha_suspencion,\'DD\') AS DIA_S, TO_CHAR(u.fecha_suspencion,\'MM\') AS MES_S, TO_CHAR(u.fecha_suspencion,\'YYYY\') AS ANIO_S FROM usuarios_tab u';
         $consulta = $this->db->prepare($sentencia);
         $consulta->execute();
 //devolvemos la coleccion para que la vista la presente.

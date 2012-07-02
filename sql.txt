@@ -74,18 +74,13 @@ CREATE SEQUENCE auto_id_material
 INCREMENT BY 1
 START WITH 10000;
 
-/*INSERTAR EN LA TABLA usuarios_tab para ivan y jona minda es la contrasena*/
-INSERT INTO usuarios_tab
-VALUES ('175705228','cf5598d8fc96c663d19c242e5a3785706a322bc9',2,'Ivan','Nawrath','Castillo',direccion_t('berlin',4268,'concepcion',8) ,telefono_t('123456789'),'01/01/1990','1');
+/*INSERTAR EN LA TABLA usuarios_tab CONTRASENA minda*/
 
 INSERT INTO usuarios_tab
-VALUES ('173947755','cf5598d8fc96c663d19c242e5a3785706a322bc9',2,'Jonathan','Fierro','Sandoval',direccion_t('Santa Amalia',42,'Lirquen',3) ,telefono_t('879879'),'01/01/1990','1');
-
-INSERT INTO usuaios_tab
-VALUES ('111111111','cf5598d8fc96c663d19c242e5a3785706a322bc9',1,'Usuario','Basico','Prueba',direccion_t('notengocasa',00,'bajoelpuente',8) ,telefono_t('879879'),'01/01/1990','1');
+VALUES ('111111111','cf5598d8fc96c663d19c242e5a3785706a322bc9',2,'Usuario','Basico','Prueba',direccion_t('notengocasa',00,'bajoelpuente',8) ,telefono_t('879879'),'01/01/1990','1');
 
 INSERT INTO materiales_tab
-VALUES('1234567890','1234567890123',10,publicacion_t('libro 1','libro','autor 1', '1990', '1990', 'editorial 1', 'resumen 2'),1);
+VALUES('1234567890',auto_id_material.NextVal,10,publicacion_t('libro 1','libro','autor 1', '1990', '1990', 'editorial 1', 'resumen 2'),1);
 
 /*SE DEBEN INSERTAR TODOS LOS PARAMETROS*/
 
@@ -118,53 +113,3 @@ drop sequence auto_id_devolucion;
 drop sequence auto_id_prestamo;
 drop sequence auto_id_material;
 /*BORRAR LA BD DE ORACLE */
-
-
-
-/********************************************************************/
-/********************************************************************/
-/********************************************************************/
-/********************************************************************/
-/*MySql*/
-
-create table usuarios_tab(
-rut varchar(9),
-contrasena varchar(40),
-tipo int,
-nombre varchar(50),
-apellido_pat varchar(30),
-apellido_mat varchar(30),
-fecha_suspencion date,
-borrado_logico int
-);
-
-/*minda es la contrasena para jonathan e ivan*/
-INSERT INTO usuarios_tab
-VALUES ('175705228','cf5598d8fc96c663d19c242e5a3785706a322bc9',2,'Ivan','Nawrath','Castillo','01/01/2011',1);
-
-INSERT INTO usuarios_tab
-VALUES ('173947755','cf5598d8fc96c663d19c242e5a3785706a322bc9',2,'Jonathan','Fierro','Sandoval','01/01/2011',1);
-
-/*para user es 0 el rut y resu la contrasena*/
-INSERT INTO usuarios_tab
-VALUES ('0','3448744cb8797d4709803236a957a582c0b9e0a2',1,'usuario','normal','pollo','01/01/2011',1);
-
-
-create table materiales_tab(
-id varchar(13),
-cantidad int,
-cantidad_prestamos int,
-nombre varchar(50),
-tipo varchar(20),
-autor varchar (50),
-edicion varchar(4),
-anio varchar(4),
-editorial varchar(20),
-resumen varchar(100),
-borrado_logico int);
-
-INSERT INTO materiales_tab
-VALUES ('001',2,1,'php','Libro','internet','1','2012','internet','libro sobre php','11');
-
-INSERT INTO materiales_tab
-VALUES ('002',1,0,'mysql','Libro','internet','1','2012','internet','libro sobre mysql','11');

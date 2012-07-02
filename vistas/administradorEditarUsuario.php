@@ -58,7 +58,7 @@
             <td colspan="2">
                 <select id="estadoUsuario">
                     <option value="1" <?php if ($estado == 2) { echo 'selected'; } ?>>Activado</option>
-                    <option value="0" <?php if ($estado == 0 || $estado == 1) { echo 'selected'; } ?>>Desactivado</option>
+                    <option value="0" <?php if ($estado == 0 || $estado == 1) { echo 'selected'; } ?>>Suspendido</option>
                 </select>
             </td>
         </tr>

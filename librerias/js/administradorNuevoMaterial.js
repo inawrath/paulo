@@ -6,7 +6,7 @@ $(document).ready(function () {
         window.location.href = url+'?controlador=material&accion=listar';
     });
 
-    var total_letras = 100;
+    var total_letras = 99;
 
     $('#resumenMaterial').keyup(function() {
         var longitud = $(this).val().length;

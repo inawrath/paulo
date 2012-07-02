@@ -50,24 +50,96 @@ class materialModelo extends baseModelos {
     }
 
     public function editarMaterial($datos) {
+        if($this->existeMaterial($datos['clasificacion']) == 0){
+            return 2;
+        }
         $sentencia = 'UPDATE materiales_tab m ' .
                 'SET m.descripcion = publicacion_t(:nombre,:tipoLibro,:autor, :edicion, :anio, :editorial, :resumen) ' .
                 'WHERE m.clasificacion = :clasificacion';
-    }
-
-    public function activarDesactivarMaterial($clasificacion, $estado) {
-        $sentencia = 'UPDATE materiales_tab m ' .
-                'SET m.borrado_logico = :estado ' .
-                'WHERE m.clasificacion = :clasificacion';
         try {
             $consulta = $this->db->prepare($sentencia);
-            $consulta->bindParam(":estado", $estado);
-            $consulta->bindParam(":clasificacion", $clasificacion);
+            $consulta->bindParam(":nombre", $datos['nombre']);
+            $consulta->bindParam(":tipoLibro", $datos['tipo']);
+            $consulta->bindParam(":autor", $datos['autor']);
+            $consulta->bindParam(":edicion", $datos['edicion']);
+            $consulta->bindParam(":anio", $datos['anio']);
+            $consulta->bindParam(":editorial", $datos['editorial']);
+            $consulta->bindParam(":resumen", $datos['resumen']);
+            $consulta->bindParam(":clasificacion", $datos['clasificacion']);
             $consulta->execute();
         } catch (PDOException $e) {
             return 0;
         }
+        $item = $this->datosMaterial($datos['clasificacion']);
+
+        $objeto = $item->fetch();
+        if ($objeto['CANTIDAD'] > $datos['copias']) {
+            $sentencia1 = 'DELETE FROM materiales_tab m ' .
+                    'WHERE m.clasificacion = :clasificacion AND ' .
+                    'm.id_material IN (SELECT MAX(m1.id_material) ' .
+                    'FROM materiales_tab m1 WHERE m1.prestado = 0 AND ' .
+                    'm1.clasificacion = :clasificacion)';
+            for ($i = 0; $i < ($objeto['CANTIDAD'] - $datos['copias']); $i++) {
+                try {
+                    $consulta1 = $this->db->prepare($sentencia1);
+                    $consulta1->bindParam(":clasificacion", $datos['clasificacion']);
+                    $consulta1->execute();
+                } catch (PDOException $e) {
+                    return 0;
+                }
+            }
+        } elseif ($objeto['CANTIDAD'] < $datos['copias']) {
+            $sentencia1 = 'INSERT INTO materiales_tab ' .
+                    'VALUES(:clasificacion,auto_id_material.NextVal,0,' .
+                    'publicacion_t(:nombre,:tipoLibro,:autor, :edicion, :anio, :editorial, :resumen),1)';
+            for ($i = 0; $i < ($datos['copias'] - $objeto['CANTIDAD']); $i++) {
+                try {
+                    $consulta1 = $this->db->prepare($sentencia1);
+                    $consulta1->bindParam(":nombre", $datos['nombre']);
+                    $consulta1->bindParam(":tipoLibro", $datos['tipo']);
+                    $consulta1->bindParam(":autor", $datos['autor']);
+                    $consulta1->bindParam(":edicion", $datos['edicion']);
+                    $consulta1->bindParam(":anio", $datos['anio']);
+                    $consulta1->bindParam(":editorial", $datos['editorial']);
+                    $consulta1->bindParam(":resumen", $datos['resumen']);
+                    $consulta1->bindParam(":clasificacion", $datos['clasificacion']);
+                    $consulta1->execute();
+                } catch (PDOException $e) {
+                    return 0;
+                }
+            }
+        }
         return 1;
+    }
+
+    public function activarDesactivarMaterial($clasificacion, $estado) {
+        if ($this->existeMaterial($clasificacion) == 0) {
+            return 2;
+        } else {
+            $sentencia = 'UPDATE materiales_tab m ' .
+                    'SET m.borrado_logico = :estado ' .
+                    'WHERE m.clasificacion = :clasificacion';
+            try {
+                $consulta = $this->db->prepare($sentencia);
+                $consulta->bindParam(":estado", $estado);
+                $consulta->bindParam(":clasificacion", $clasificacion);
+                $consulta->execute();
+            } catch (PDOException $e) {
+                return 0;
+            }
+            return 1;
+        }
+    }
+
+    private function existeMaterial($clasificacion) {
+        $sentencia = 'SELECT COUNT(m.id_material) ' .
+                'FROM materiales_tab m ' .
+                'WHERE m.clasificacion = :clasificacion';
+        $consulta = $this->db->prepare($sentencia);
+        $consulta->bindParam(":clasificacion", $clasificacion);
+        $consulta->execute();
+        $item = $consulta->fetch();
+        return $item[0];
     }
 
     public function listadoUsuarioPrestamo() {
@@ -248,6 +320,8 @@ class materialModelo extends baseModelos {
                 $consulta5->bindParam(":suspencion", $castigo);
                 $consulta5->bindParam(":rut", $objeto['rut']);
                 $consulta5->execute();
+
+                return '3,' . $fecha['mday'] . '-' . $fecha['mon'] . '-' . $fecha['year'];
             }
         }
         return 1;

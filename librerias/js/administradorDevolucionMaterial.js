@@ -11,8 +11,7 @@ $(document).ready(function () {
             type: 'POST',
             data: 'submit=&id='+$id,
             success: function(respuesta){
-                alert(respuesta);
-                switch(respuesta){
+                switch(respuesta.substring(0,1)){
                     case '0':
                         alert('Problemas al devolver! Intentelo mas tarde...');
                         break;
@@ -21,6 +20,9 @@ $(document).ready(function () {
                         break;
                     case '2':
                         alert('El material no a sido prestado');
+                        break;
+                    case '3':
+                        alert('Usuario suspendido hasta el '+respuesta.substring(2,respuesta.length));
                         break;
                 }
             },

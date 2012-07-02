@@ -15,7 +15,15 @@ $(document).ready(function () {
             return b;
         })(window.location.search.substr(1).split('&'))
     })(jQuery);
-    
+    var total_letras = 99;
+
+    $('#resumenMaterial').keyup(function() {
+        var longitud = $(this).val().length;
+        var resto = total_letras - longitud;
+        if(resto <= 0){
+            $('#resumenMaterial').attr("maxlength", total_letras);
+        }
+    });
     $('#cancelarActualizarMaterial').click(function(){
         window.location.href = url+'?controlador=material&accion=listar';
     });
@@ -37,8 +45,18 @@ $(document).ready(function () {
             type: 'POST',
             data: 'submit=&clasificacion='+$clasificacion+'&nombre='+$nombre+'&tipo='+$tipo+'&autor='+$autor+'&edicion='+$edicion+'&anio='+$anio+'&editorial='+$editorial+'&copias='+$copias+'&resumen='+$resumen,
             success: function(datos){
-                alert(datos);
-                //imprimir un mensaje de correcto o no xD
+                switch(datos){
+                    case '1':
+                        alert('Editado Correctamente! Redireccionando...');
+                        window.location.href = url+'?controlador=material&accion=listar';
+                        break;
+                    case '0':
+                        alert('Problemas al editar! Intentelo nuevamente mas tarde...');
+                        break;
+                    case '2':
+                        window.location.href = url+'?controlador=material&accion=listar';
+                        break;
+                }
             },
             error: function(){
                 alert('error');

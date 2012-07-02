@@ -35,7 +35,7 @@ class usuarioControlador extends BaseControladores {
 
     public function listar() {
         //Incluye el modelo que corresponde
-        require 'modelos/usuarioModelo.php';
+        require_once 'modelos/usuarioModelo.php';
 
         //Creamos una instancia de nuestro 'modelo'
         $items = new usuarioModelo();

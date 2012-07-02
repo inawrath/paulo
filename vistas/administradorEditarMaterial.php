@@ -2,6 +2,7 @@
 <table align="center" class="tablaEntrada">
     <?php
     while ($item = $listado->fetch()) {
+        print_r($item);
         ?>
         <tr>
             <td>Clasificación:</td><td colspan="2"><input id="clasificacionMaterial" value="<?php echo $item['CLASIFICACION'] ?>" readonly/></td>
@@ -35,7 +36,7 @@
             <td>Nro Copias:</td><td colspan="2"><input id="copiasMaterial" value="<?php echo $item['CANTIDAD'] ?>"/></td>
         </tr>
         <tr>
-            <td>Resumen:</td><td><textarea id="resumenMaterial"><?php echo $item['DESCRIPCION.RESUMEN'] ?></textarea></td>
+            <td>Resumen:</td><td colspan="2"><textarea id="resumenMaterial"><?php echo $item['DESCRIPCION.RESUMEN'] ?></textarea></td>
         </tr>
         <tr>
             <td></td><td><button id="guardarActualizarMaterial" class="boton">Guardar Nuevo Material</button></td><td><button id="cancelarActualizarMaterial" class="boton">cancelar</button></td>

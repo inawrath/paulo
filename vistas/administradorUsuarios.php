@@ -5,13 +5,20 @@
 <br/>
 <table align="center" class="bordered">
     <tr> 
-        <th>Rut</th><th>Nombre</th><th>Tipo</th><th>Editar</th><th>Eliminar</th>
+        <th>Rut</th><th>Nombre</th><th>Tipo</th><th>Estado</th><th>Editar</th><th>Eliminar</th>
     </tr>
     <?php
+    require_once 'controladores/inicioControlador.php';
     while ($item = $listado->fetch()) {
+        $fecha['mday'] = $item['DIA_S'];
+        $fecha['mon'] = $item['MES_S'];
+        $fecha['year'] = $item['ANIO_S'];
+
+        $fechaActual = getdate();
+        $estado = inicioControlador::compararFechas($fecha, $fechaActual);
         ?>
         <tr>
-            <td><?= $item['RUT'] ?></td><td><?= $item['NOMBRE'] ?></td><td><? if($item['TIPO'] == '2'){ echo 'Administrador'; }else{ echo 'Usuario'; } ?></td>
+            <td><?= $item['RUT'] ?></td><td><?= $item['NOMBRE'] ?></td><td><? if($item['TIPO'] == '2'){ echo 'Administrador'; }else{ echo 'Usuario'; } ?></td><td><?php if($estado == 2){ echo 'Activo'; } else { echo 'Suspendido'; } ?></td>
             <?php
             if ($item['BORRADO_LOGICO'] == 0) {
                 ?>

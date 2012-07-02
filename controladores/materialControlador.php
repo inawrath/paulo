@@ -51,8 +51,12 @@ class materialControlador extends baseControladores {
 
     public function editar($id) {
         if (isset($_POST['submit'])) {
-            //aca hacemos el update
-            print_r($_POST);
+            require_once 'modelos/materialModelo.php';
+            
+            $editar = new materialModelo();
+            $editado = $editar->editarMaterial($_POST);
+
+            echo $editado;
         } else {
             //Incluye el modelo que corresponde
             require 'modelos/materialModelo.php';

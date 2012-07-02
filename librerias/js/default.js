@@ -3,6 +3,7 @@ $(document).ready(function () {
     jQuery.fn.obtenerVariable = function(nombre){
         switch (nombre) {
             case 'url':
+                //alert('http://'+window.location.hostname+window.location.pathname);
                 return 'http://localhost/paulo/';
                 break;
             default:
