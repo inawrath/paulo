@@ -8,7 +8,7 @@
             <td>Clasificación:</td><td colspan="2"><input id="clasificacionMaterial" value="<?php echo $item['CLASIFICACION'] ?>" readonly/></td>
         </tr>
         <tr>
-            <td>Nombre:</td><td colspan="2"><input id="nombreMaterial" value="<?php echo $item['DESCRIPCION.NOMBRE'] ?>"/></td>
+            <td>Nombre:</td><td colspan="2"><input id="nombreMaterial" value="<?php echo $item['DESCRIPCION.NOMBRE'] ?>" maxlength="" /></td>
         </tr>
         <tr>
             <td>Tipo:</td>

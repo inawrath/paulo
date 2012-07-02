@@ -17,7 +17,7 @@ $(document).ready(function () {
         var $calleDireccion = $('#calleDireccionUsuario').attr('value');
         var $numeroDireccion = $('#numeroDireccionUsuario').attr('value');
         var $ciudadDireccion = $('#ciudadDireccionUsuario').attr('value');
-        var $regionDireccion = $('#regionDireccionUsuario').attr('value');
+        var $regionDireccion = $('#regionDireccionUsuario option:selected').attr('value');
         var $telefono = $('#telefonoUsuario').attr('value');
         
         $.ajax({

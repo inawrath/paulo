@@ -13,12 +13,19 @@ class usuarioControlador extends BaseControladores {
         $datosUsuario = $usuarios->encontrarUsuario($_POST['rut'], $_POST['contrasena']);
         $n = 0;
         while ($item = $datosUsuario->fetch()) {
-            $_SESSION['username'] = $item['NOMBRE'];
-            $_SESSION['userid'] = $item['RUT'];
-            $_SESSION['tipo'] = $item['TIPO'];
-            $_SESSION['acceso'] = true;
+            $fecha['year'] = $item['ANIO'];
+            $fecha['mon'] = $item['MES'];
+            $fecha['mday'] = $item['DIA'];
+            $fechaActual = getdate();
+            require_once 'controladores/inicioControlador.php';            
+            if (inicioControlador::compararFechas($fecha, $fechaActual)== 2) {
+                $_SESSION['username'] = $item['NOMBRE'];
+                $_SESSION['userid'] = $item['RUT'];
+                $_SESSION['tipo'] = $item['TIPO'];
+                $_SESSION['acceso'] = true;
 
-            $n++;
+                $n++;
+            }
         }
         echo $n;
     }
@@ -106,7 +113,7 @@ class usuarioControlador extends BaseControladores {
         if (inicioControlador::valida_rut($rut)) {
             require_once 'modelos/usuarioModelo.php';
             $activar = new usuarioModelo();
-            $activado = $activar->activarDesactivarUsuario($rut,0);
+            $activado = $activar->activarDesactivarUsuario($rut, 0);
             echo $activado;
         } else {
             echo 3;
@@ -118,7 +125,7 @@ class usuarioControlador extends BaseControladores {
         if (inicioControlador::valida_rut($rut)) {
             require_once 'modelos/usuarioModelo.php';
             $activar = new usuarioModelo();
-            $activado = $activar->activarDesactivarUsuario($rut,1);
+            $activado = $activar->activarDesactivarUsuario($rut, 1);
             echo $activado;
         } else {
             echo 3;

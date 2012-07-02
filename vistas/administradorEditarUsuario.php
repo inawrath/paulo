@@ -11,6 +11,7 @@
         $estado = inicioControlador::compararFechas($fecha, $fechaActual);
         $_SESSION['fecha_suspencion'] = $fecha['mday'].'/'.$fecha['mon'].'/'.$fecha['year'];
         $_SESSION['estado'] = $estado;
+        print_r($item);
         ?><tr>
             <td>Rut:</td><td colspan="2"><input id="rutUsuario" value="<?php echo $item['RUT'] ?>" readonly/></td>
         </tr>
@@ -48,7 +49,24 @@
             <td>Ciudad:</td><td colspan="2"><input id="ciudadDireccionUsuario" value="<?php echo $item['DIRECCION.CIUDAD'] ?>"/></td>
         </tr>
         <tr>
-            <td>Region:</td><td colspan="2"><input id="regionDireccionUsuario" value="<?php echo $item['DIRECCION.REGION'] ?>"/></td>
+            <td>Region:</td><td colspan="2">
+            <select id="regionDireccionUsuario">
+                <option value="15" <?php if($item['DIRECCION.REGION'] == 15) { echo 'selected'; }?>>Arica y Parinacota</option>
+                <option value="1" <?php if($item['DIRECCION.REGION'] == 1) { echo 'selected'; }?>>Tarapac&aacute;</option>
+                <option value="2" <?php if($item['DIRECCION.REGION'] == 2) { echo 'selected'; }?>>Antofagasta</option>
+                <option value="3" <?php if($item['DIRECCION.REGION'] == 3) { echo 'selected'; }?>>Atacama</option>
+                <option value="4" <?php if($item['DIRECCION.REGION'] == 4) { echo 'selected'; }?>>Coquimbo</option>
+                <option value="5" <?php if($item['DIRECCION.REGION'] == 5) { echo 'selected'; }?>>Valpara&iacute;so</option>
+                <option value="13" <?php if($item['DIRECCION.REGION'] == 13) { echo 'selected'; }?>>Region Metropolitana</option>
+                <option value="6" <?php if($item['DIRECCION.REGION'] == 6) { echo 'selected'; }?>>O&apos;Higgins</option>
+                <option value="7" <?php if($item['DIRECCION.REGION'] == 7) { echo 'selected'; }?>>Maule</option>
+                <option value="8" <?php if($item['DIRECCION.REGION'] == 8) { echo 'selected'; }?>>Biob&iacute;o</option>
+                <option value="9" <?php if($item['DIRECCION.REGION'] == 9) { echo 'selected'; }?>>Araucan&iacute;a</option>
+                <option value="14" <?php if($item['DIRECCION.REGION'] == 14) { echo 'selected'; }?>>Los R&iacute;os</option>
+                <option value="10" <?php if($item['DIRECCION.REGION'] == 10) { echo 'selected'; }?>>Los Lagos</option>
+                <option value="11" <?php if($item['DIRECCION.REGION'] == 11) { echo 'selected'; }?>>Ays&eacute;n</option>
+                <option value="12" <?php if($item['DIRECCION.REGION'] == 12) { echo 'selected'; }?>>Magallanes</option>
+            </select></td>
         </tr>
         <tr>
             <td>Telefono:</td><td colspan="2"><input id="telefonoUsuario" value="<?php echo $item['COLUMN_VALUE'] ?>"/></td>
