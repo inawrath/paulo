@@ -10,7 +10,7 @@ class materialModelo extends baseModelos {
         if ($tipo == 1) {
             $sentencia .= 'WHERE m.prestado = 0 ';
         }
-        $sentencia .= 'GROUP BY m.descripcion.nombre, m.descripcion.tipo, m.descripcion.resumen, m.borrado_logico, m.clasificacion';
+        $sentencia .= 'GROUP BY m.descripcion.nombre, m.descripcion.tipo, m.descripcion.resumen, m.borrado_logico, m.clasificacion ';
         $consulta = $this->db->prepare($sentencia);
         $consulta->execute();
         //devolvemos la coleccion para que la vista la presente.

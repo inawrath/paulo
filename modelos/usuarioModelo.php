@@ -6,7 +6,9 @@ class usuarioModelo extends baseModelos {
 //realizamos la consulta de todos los items
 //SELECT t.rut, t.contrasena FROM usuarios_tab t where t.rut = 173947755;
 
-        $sentencia = 'SELECT t.rut, t.contrasena, t.tipo, t.nombre,TO_CHAR(t.fecha_suspencion,\'DD\') AS DIA, TO_CHAR(t.fecha_suspencion,\'MM\') AS MES, TO_CHAR(t.fecha_suspencion,\'YYYY\') AS ANIO '.
+        $sentencia = 'SELECT t.rut, t.contrasena, t.tipo, t.nombre, '.
+                't.apellido_pat, t.apellido_mat, '.
+                'TO_CHAR(t.fecha_suspencion,\'DD\') AS DIA, TO_CHAR(t.fecha_suspencion,\'MM\') AS MES, TO_CHAR(t.fecha_suspencion,\'YYYY\') AS ANIO '.
                 'FROM usuarios_tab t '.
                 'WHERE t.rut= :rut AND t.contrasena=:contrasena AND t.borrado_logico = 1 ';
         $consulta = $this->db->prepare($sentencia);

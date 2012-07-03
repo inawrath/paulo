@@ -2,7 +2,6 @@
 <table align="center" class="tablaEntrada">
     <?php
     while ($item = $listado->fetch()) {
-        print_r($item);
         ?>
         <tr>
             <td>Clasificación:</td><td colspan="2"><input id="clasificacionMaterial" value="<?php echo $item['CLASIFICACION'] ?>" readonly/></td>

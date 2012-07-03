@@ -19,7 +19,7 @@ class usuarioControlador extends BaseControladores {
             $fechaActual = getdate();
             require_once 'controladores/inicioControlador.php';            
             if (inicioControlador::compararFechas($fecha, $fechaActual)== 2) {
-                $_SESSION['username'] = $item['NOMBRE'];
+                $_SESSION['username'] = $item['NOMBRE'].' '.$item['APELLIDO_PAT'].' '.$item['APELLIDO_MAT'];
                 $_SESSION['userid'] = $item['RUT'];
                 $_SESSION['tipo'] = $item['TIPO'];
                 $_SESSION['acceso'] = true;

@@ -11,7 +11,6 @@
         $estado = inicioControlador::compararFechas($fecha, $fechaActual);
         $_SESSION['fecha_suspencion'] = $fecha['mday'].'/'.$fecha['mon'].'/'.$fecha['year'];
         $_SESSION['estado'] = $estado;
-        print_r($item);
         ?><tr>
             <td>Rut:</td><td colspan="2"><input id="rutUsuario" value="<?php echo $item['RUT'] ?>" readonly/></td>
         </tr>

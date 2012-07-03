@@ -7,10 +7,10 @@ class inicioControlador extends baseControladores {
         switch ($_SESSION['tipo']) {
             case 0:
                 //Incluye el modelo que corresponde
-                require 'modelos/inicioModelo.php';
+                require 'modelos/materialModelo.php';
 
                 //Creamos una instancia de nuestro "modelo"
-                $items = new inicioModelo();
+                $items = new materialModelo();
 
                 //Le pedimos al modelo todos los items usuarios
                 $listado = $items->listarMateriales();
