@@ -11,7 +11,7 @@ class autentificacion {
     public static function invitado($var) {
         $nombreControlador = $var['controlador'];
         $nombreAccion = $var['accion'];
-        //echo $nombreControlador.$nombreAccion;
+
         switch ($nombreControlador) {
             case 'inicio':
                 switch ($nombreAccion) {
@@ -68,37 +68,6 @@ class autentificacion {
             return 1;
         }
         
-        /*$nombreControlador = $var['controlador'];
-        $nombreAccion = $var['accion'];
-        switch ($nombreControlador) {
-            case 'inicio':
-                switch ($nombreAccion) {
-                    case 'inicio':
-                        return 1;
-                        break;
-                    case 'nuevoUsuario':
-                        return 1;
-                        break;
-                    default: return 4;
-                        break;
-                }
-                break;
-            case 'usuario':
-                switch ($nombreAccion) {
-                    case 'nuevo':
-                        return 1;
-                        break;
-                    case 'salir':
-                        return 1;
-                        break;
-                    default: return 4;
-                        break;
-                }
-                break;
-            default: return 4;
-                break;
-        }
-        return 4;//*/
     }
 
 }

@@ -37,15 +37,4 @@ class config
         return self::$instancia;
     }
 }
-/*
- Uso:
- 
- $config = Config::singleton();
- $config->guardar_var('nombre', 'Federico');
- echo $config->obtener_var('nombre');
- 
- $config2 = Config::singleton();
- echo $config2->obtener_var('nombre');
- 
-*/
 ?>

@@ -11,7 +11,7 @@
     for ($j = 0; $j < $listado[$i]['cantidad']; $j++) {
         if ($j != 0)
             echo ', ';
-        echo $listado[$i][$j][0] . '(' . $listado[$i][$j][1] . ')';
+        echo $listado[$i][$j][0] . '(' . $listado[$i][$j][1] . ') ';
     }
         ?></td></tr><?php }
     ?>

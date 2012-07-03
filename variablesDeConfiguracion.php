@@ -8,15 +8,6 @@ $config->guardarVariable('dbname', 'XE');
 $config->guardarVariable('dbuser', 'SYSTEM');
 $config->guardarVariable('dbpass', 'oracle');
 //*/
-
-/*base de datos de pruebas*/
-/*$config->guardarVariable('driver', 'mysql');
-$config->guardarVariable('dbhost', 'localhost');
-$config->guardarVariable('dbname', 'prueba');
-$config->guardarVariable('dbuser', 'root');
-$config->guardarVariable('dbpass', '');
-//*/
-
 //PUERTO SOLO PARA ORACLE
 $config->guardarVariable('port', '1521');
 

@@ -31,7 +31,6 @@ $(document).ready(function(){
                     data: 'rut=' + $rut.val() + '&contrasena=' + $contrasena.val(),
                     success:function(msj){
                         //probar resultado que devuelve
-                        //alert(msj);
                         if ( msj == 1 ){
                             $alerta.html('<div class="cajaCorrecta"></div>');
                             $('.cajaCorrecta').hide(0).html('Espera un momento&#133;');

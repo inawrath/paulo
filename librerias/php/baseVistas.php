@@ -57,10 +57,4 @@ class baseVistas {
     }
 
 }
-
-/*
-  El uso es bastante sencillo:
-  $vista = new BaseVistas();
-  $vista->desplegar('listado.php', array("nombre" => "Juan"));
- */
 ?>

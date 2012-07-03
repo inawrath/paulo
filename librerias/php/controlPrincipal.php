@@ -23,7 +23,6 @@ class controlPrincipal {
         } else {
             $nombreControlador = "inicioControlador";
         }
-        //print_r($variablesURL);
         //Lo mismo sucede con las acciones, si no hay accion, tomamos inicio como accion
         if (!empty($variablesURL['accion'])) {
             $nombreAccion = $variablesURL['accion'];
